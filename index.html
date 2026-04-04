@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GetSetReply - The AI Agent Platform</title>
+    
+    <!-- Fonts: General Sans via Fontshare -->
+    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- GSAP & Lenis Smooth Scroll -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['General Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        charcoal: '#061614',
+                        snow: '#F9FAFB',
+                        brand: {
+                            50: '#F0FDF4',
+                            100: '#DCFCE7',
+                            200: '#BBF7D0',
+                            400: '#4ADE80',
+                            500: '#22C55E',
+                            600: '#16A34A',
+                            700: '#15803D',
+                        },
+                        accent: {
+                            mint: '#A7F3D0',
+                            forest: '#064E3B',
+                            teal: '#0D9488'
+                        }
+                    },
+                    animation: {
+                        blob: "blob 10s infinite",
+                        shimmer: "shimmer 3s infinite",
+                        'spin-slow': 'spin 8s linear infinite',
+                        'infinite-scroll': 'infinite-scroll 40s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            "0%": { transform: "translate(0px, 0px) scale(1)" },
+                            "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                            "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                            "100%": { transform: "translate(0px, 0px) scale(1)" }
+                        },
+                        shimmer: {
+                            "0%": { transform: "translateX(-100%)" },
+                            "100%": { transform: "translateX(100%)" }
+                        },
+                        'infinite-scroll': {
+                            from: { transform: 'translateX(0)' },
+                            to: { transform: 'translateX(-50%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: '1', filter: 'drop-shadow(0 0 5px #22C55E)' },
+                            '50%': { opacity: '0.6', filter: 'drop-shadow(0 0 15px #22C55E)' },
+                        },
+                        'pulse-soft': {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.4' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        body {
+            background-color: #F8FAFC;
+            color: #061614;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 40px -10px rgba(6, 78, 59, 0.05), inset 0 1px 0 rgba(255,255,255,0.9);
+            border-radius: 24px;
+        }
+
+        .glass-panel-heavy {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border: 1px solid rgba(255, 255, 255, 1);
+            box-shadow: 0 20px 40px -10px rgba(6, 78, 59, 0.08);
+            border-radius: 24px;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #061614 0%, #22C55E 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .bg-mesh-1 { background-color: #DCFCE7; }
+        .bg-mesh-2 { background-color: #ECFDF5; }
+        .bg-mesh-3 { background-color: #F0FDFA; }
+
+        .shimmer-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+        }
+        .shimmer-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+            animation: shimmer 3s infinite;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .reveal-glass { visibility: hidden; }
+
+        .scroller-mask {
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        }
+
+        .robot-head { transform-origin: center bottom; }
+        .robot-eye { fill: #22C55E; animation: pulse-glow 2s infinite; }
+        .robot-body { transform-origin: center center; }
+
+        /* Graphic Elements for Sales Outreach */
+        .dash-line {
+            stroke-dasharray: 6;
+            animation: dash-offset 20s linear infinite;
+        }
+        @keyframes dash-offset {
+            to { stroke-dashoffset: -200; }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-200 selection:text-charcoal">
+
+    <!-- Ambient Animated Mesh Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-mesh-1 mix-blend-multiply filter blur-[100px] opacity-60 animate-blob"></div>
+        <div class="absolute top-[20%] right-[-10%] w-[45vw] h-[45vw] rounded-full bg-mesh-2 mix-blend-multiply filter blur-[100px] opacity-60 animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-[-20%] left-[20%] w-[55vw] h-[55vw] rounded-full bg-mesh-3 mix-blend-multiply filter blur-[100px] opacity-60 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2 font-bold text-xl tracking-tight">
+                <i class="ph-fill ph-paper-plane-tilt text-brand-500 text-2xl"></i>
+                <span>GetSetReply</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+                <a href="#" class="hover:text-brand-600 transition-colors">Home</a>
+                <a href="#" class="hover:text-brand-600 transition-colors">Features</a>
+                <a href="#" class="hover:text-brand-600 transition-colors">Pricing</a>
+                
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="#" class="hidden md:block text-sm font-medium text-slate-600 hover:text-charcoal transition-colors">Sign in</a>
+                <button class="bg-charcoal text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-brand-700 transition-colors shadow-lg shadow-brand-700/20">
+                    Get Started
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-40 pb-20 lg:pt-48 lg:pb-32 px-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            
+            <!-- Left: Typography & CTA -->
+            <div class="hero-text z-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/60 border border-white backdrop-blur-md mb-6 shadow-sm">
+                    <span class="flex h-2 w-2 rounded-full bg-brand-500"></span>
+                    <span class="text-xs font-semibold text-slate-600 uppercase tracking-wider">Automate Customer Engagement</span>
+                </div>
+                <h1 class="text-5xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
+                    Master Every Review with <br/><span class="text-gradient">AI Automation</span>
+                </h1>
+                <p class="text-lg text-slate-600 mb-10 max-w-xl leading-relaxed">
+                    GetSetReply builds dedicated AI agents that monitor your brand's reputation, drafting perfect, context-aware replies to every review across all platforms—instantly.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button class="bg-brand-500 text-white px-8 py-4 rounded-full font-medium hover:bg-brand-600 transition-all shadow-xl shadow-brand-500/30 flex items-center justify-center gap-2 group">
+                        Start for free
+                        <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                    <button class="glass-panel px-8 py-4 rounded-full font-medium text-charcoal hover:bg-white/80 transition-all flex items-center justify-center gap-2">
+                        <i class="ph ph-play-circle text-xl"></i>
+                        Book a Demo
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right: Updated Review Case Study Composition -->
+            <div class="relative h-[500px] w-full z-10 hero-visual perspective-1000">
+                <!-- Base Dashboard Glass -->
+                <div class="absolute inset-4 glass-panel p-6 floating-element-1">
+                    <div class="flex items-center justify-between border-b border-white/50 pb-4 mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-brand-500/10 flex items-center justify-center">
+                                <i class="ph ph-star text-brand-600"></i>
+                            </div>
+                            <span class="text-sm font-bold">Review Pipeline</span>
+                        </div>
+                        <div class="flex gap-1.5">
+                            <div class="w-2.5 h-2.5 rounded-full bg-brand-400"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></div>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-end">
+                            <div class="space-y-2 w-1/2">
+                                <div class="h-2.5 bg-slate-200 rounded-full w-full"></div>
+                                <div class="h-2.5 bg-slate-100 rounded-full w-2/3"></div>
+                            </div>
+                            <div class="h-12 w-12 rounded-full border-4 border-brand-500 border-t-transparent animate-spin-slow"></div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3 pt-4">
+                            <div class="h-16 bg-white/40 rounded-xl border border-white/60 p-3">
+                                <div class="h-2 w-8 bg-brand-200 rounded-full mb-2"></div>
+                                <div class="h-4 w-12 bg-charcoal/10 rounded-lg"></div>
+                            </div>
+                            <div class="h-16 bg-white/40 rounded-xl border border-white/60 p-3">
+                                <div class="h-2 w-8 bg-amber-200 rounded-full mb-2"></div>
+                                <div class="h-4 w-12 bg-charcoal/10 rounded-lg"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating Chat Bubble Left (The Customer Review) -->
+                <div class="absolute -left-4 top-10 glass-panel-heavy p-4 max-w-[280px] shadow-2xl floating-element-2 border-l-4 border-l-amber-400 z-20">
+                    <div class="flex items-center gap-1 mb-2 text-amber-400">
+                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph ph-star"></i>
+                    </div>
+                    <p class="text-xs font-semibold text-slate-800 leading-relaxed italic">
+                        "The delivery was a bit late, but the product quality exceeded my expectations. Wish tracking was better."
+                    </p>
+                    <p class="text-[10px] text-slate-400 mt-2 font-medium">— Sarah M. on Google</p>
+                </div>
+
+                <!-- Floating Chat Bubble Right (The AI Response) -->
+                <div class="absolute -right-4 bottom-20 glass-panel-heavy p-5 max-w-sm shadow-2xl floating-element-3 border-l-4 border-l-brand-500 z-30">
+                    <div class="flex items-start gap-3">
+                        <div class="w-9 h-9 rounded-full bg-charcoal flex items-center justify-center text-white shrink-0 shadow-lg">
+                            <i class="ph ph-sparkle text-brand-400"></i>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-2">
+                                <span class="text-[10px] font-bold text-brand-600 bg-brand-50 px-2 py-0.5 rounded uppercase">AI Draft Ready</span>
+                            </div>
+                            <p class="text-xs font-medium text-slate-700 leading-relaxed">
+                                "Hi Sarah! Thanks for the 4 stars. We're sorry about the delivery delay. We've just updated our tracking system to ensure a smoother experience next time!"
+                            </p>
+                            <div class="flex gap-2">
+                                <button class="text-[10px] bg-brand-600 text-white px-4 py-1.5 rounded-full shadow-sm font-bold hover:bg-brand-700 transition-colors">Post Reply</button>
+                                <button class="text-[10px] bg-white text-slate-600 px-4 py-1.5 rounded-full border border-slate-200 shadow-sm font-bold">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+        <!-- Features Bento Grid -->
+    <section id="features" class="py-24 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal-glass">
+                <h2 class="text-sm font-bold text-brand-600 uppercase tracking-widest mb-2">AI-Driven Features</h2>
+                <!-- <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/60 border border-white backdrop-blur-md mb-6 shadow-sm">
+                    <span class="flex h-2 w-2 rounded-full bg-brand-500"></span>
+                    <span class="text-xs font-semibold text-slate-600 uppercase tracking-wider">AI-Driven Features</span>
+                </div> -->
+                <h3 class="text-4xl font-bold tracking-tight mb-4">Build, Deploy and Scale Your<br/>Entire AI Workforce</h3>
+                <p class="text-slate-600 max-w-2xl mx-auto">GetSetReply helps you eliminate bottlenecks, automate complex workflows, and make smarter decisions with AI agents working 24/7.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[320px]">
+                
+                <!-- Smart Automation Card (Animated Graphic) -->
+                <div class="glass-panel p-8 md:col-span-2 flex flex-col group overflow-hidden relative reveal-glass">
+                    <div class="relative z-10 flex flex-col md:flex-row gap-8 items-stretch h-full">
+                        <div class="flex-1 py-4">
+                            <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mb-6 shadow-sm">
+                                <i class="ph ph-arrows-merge text-2xl text-brand-600"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-2">Smart Automation</h4>
+                            <p class="text-slate-600 max-w-md text-sm lg:text-base leading-relaxed">
+                                Empowering you with AI-driven workflows designed to simplify operations and enhance productivity instantly.
+                            </p>
+                        </div>
+
+                        <!-- Workflow Builder Graphic -->
+                        <div class="flex-1 relative flex items-center justify-center min-h-[220px]">
+                            <svg class="absolute inset-0 w-full h-full -z-10" viewBox="0 0 300 200">
+                                <!-- Paths with dash animation -->
+                                <path d="M50,60 Q100,60 140,100" stroke="#DCFCE7" stroke-width="2" fill="none" class="animated-path" />
+                                <path d="M50,100 L140,100" stroke="#BBF7D0" stroke-width="2" fill="none" class="animated-path" style="animation-delay: 0.5s" />
+                                <path d="M50,140 Q100,140 140,100" stroke="#DCFCE7" stroke-width="2" fill="none" class="animated-path" style="animation-delay: 1s" />
+                                <path d="M160,100 L240,100" stroke="#22C55E" stroke-width="3" stroke-dasharray="6 4" fill="none" class="animated-path" />
+                            </svg>
+
+                            <!-- Input Sources -->
+                            <div class="absolute left-4 space-y-4">
+                                <div class="glass-panel p-2 shadow-sm flex items-center gap-2 group-hover:translate-x-2 transition-transform">
+                                    <i class="ph ph-google-logo text-brand-600 text-xs"></i>
+                                    <div class="h-1.5 w-8 bg-brand-100 rounded-full"></div>
+                                </div>
+                                <div class="glass-panel p-2 shadow-sm flex items-center gap-2 group-hover:translate-x-4 transition-transform delay-75">
+                                    <i class="ph ph-facebook-logo text-blue-500 text-xs"></i>
+                                    <div class="h-1.5 w-10 bg-slate-100 rounded-full"></div>
+                                </div>
+                                <div class="glass-panel p-2 shadow-sm flex items-center gap-2 group-hover:translate-x-2 transition-transform delay-150">
+                                    <i class="ph ph-instagram-logo text-pink-500 text-xs"></i>
+                                    <div class="h-1.5 w-6 bg-slate-100 rounded-full"></div>
+                                </div>
+                            </div>
+
+                            <!-- Central AI Node -->
+                            <div class="glass-panel-heavy p-5 shadow-2xl rounded-3xl border-brand-100 flex flex-col items-center gap-2 z-20 group-hover:scale-110 transition-transform duration-500">
+                                <div class="w-10 h-10 rounded-full bg-charcoal flex items-center justify-center animate-spin-slow shadow-lg">
+                                    <i class="ph ph-circles-three-plus text-brand-400 text-xl"></i>
+                                </div>
+                                <span class="text-[9px] font-bold tracking-tighter text-slate-800">AUTOMATING</span>
+                            </div>
+
+                            <!-- Output Node -->
+                            <div class="absolute right-4 glass-panel-heavy p-3 shadow-xl border-l-4 border-l-brand-600 group-hover:-translate-x-2 transition-transform duration-500">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-4 h-4 rounded bg-brand-500 flex items-center justify-center">
+                                        <i class="ph ph-check text-[10px] text-white"></i>
+                                    </div>
+                                    <span class="text-[9px] font-bold text-slate-700">TASK DONE</span>
+                                </div>
+                                <div class="h-1.5 w-16 bg-brand-50 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Adaptive Learning Card -->
+                <div class="glass-panel p-8 flex flex-col justify-between group overflow-hidden relative reveal-glass">
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mb-6 shadow-sm">
+                            <i class="ph ph-brain text-2xl text-teal-600"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">Adaptive Learning</h4>
+                        <p class="text-slate-600 text-sm">AI that evolves with your data, continuously improving performance.</p>
+                    </div>
+                </div>
+
+                <!-- Predictive Analytics Card -->
+                <div class="glass-panel p-8 flex flex-col justify-between group overflow-hidden relative reveal-glass">
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mb-6 shadow-sm">
+                            <i class="ph ph-chart-line-up text-2xl text-brand-600"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">Predictive Analytics</h4>
+                        <p class="text-slate-600 text-sm">Harness advanced models to forecast trends and uncover insights.</p>
+                    </div>
+                </div>
+
+                <!-- Sales Outreach Card (Animated Graphic) -->
+                <div class="glass-panel p-8 md:col-span-2 flex flex-col justify-between group overflow-hidden relative reveal-glass">
+                    <div class="relative z-10 flex flex-col md:flex-row gap-8 items-stretch h-full">
+                        <div class="flex-1 py-4">
+                            <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mb-6 shadow-sm">
+                                <i class="ph ph-envelope-simple-open text-2xl text-emerald-600"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-2">Sales Outreach</h4>
+                            <p class="text-slate-600 text-sm lg:text-base">Personalize campaigns at scale, nurture leads, and close deals faster with AI-driven engagement flows.</p>
+                        </div>
+                        
+                        <!-- Animated Outreach Graphic -->
+                        <div class="flex-1 relative flex items-center justify-center min-h-[220px]">
+                            <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 300 200">
+                                <path d="M60,60 C120,60 180,140 240,140" fill="none" stroke="#DCFCE7" stroke-width="2" stroke-dasharray="6 4" class="animated-path" />
+                                <circle cx="60" cy="60" r="3" fill="#22C55E" class="animate-pulse" />
+                                <circle cx="240" cy="140" r="3" fill="#22C55E" class="animate-pulse" />
+                            </svg>
+
+                            <div class="absolute top-4 left-4 glass-panel p-2 shadow-lg border-brand-100 flex items-center gap-2 transform group-hover:scale-105 transition-transform">
+                                <div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden flex items-center justify-center">
+                                    <i class="ph-fill ph-user text-slate-400"></i>
+                                </div>
+                                <div class="pr-2">
+                                    <div class="h-2 w-12 bg-slate-200 rounded-full mb-1"></div>
+                                    <div class="h-1.5 w-16 bg-slate-100 rounded-full"></div>
+                                </div>
+                            </div>
+
+                            <div class="absolute bottom-4 right-4 glass-panel p-2 shadow-lg border-brand-100 flex items-center gap-2 transform group-hover:scale-105 transition-transform delay-75">
+                                <div class="w-8 h-8 rounded-full bg-brand-100 overflow-hidden flex items-center justify-center">
+                                    <i class="ph-fill ph-user text-brand-400"></i>
+                                </div>
+                                <div class="pr-2">
+                                    <div class="h-2 w-12 bg-brand-200 rounded-full mb-1"></div>
+                                    <div class="h-1.5 w-16 bg-brand-50 rounded-full"></div>
+                                </div>
+                            </div>
+
+                            <div class="glass-panel-heavy p-4 shadow-2xl border-l-4 border-l-brand-500 w-full max-w-[240px] z-20 group-hover:-translate-y-2 transition-transform duration-500 animate-float">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <div class="w-5 h-5 rounded bg-brand-600 flex items-center justify-center">
+                                        <i class="ph ph-sparkle text-[10px] text-white"></i>
+                                    </div>
+                                    <span class="text-[9px] font-bold text-brand-700 uppercase tracking-tight">AI Drafting...</span>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="h-2 w-full bg-slate-100 rounded-full opacity-60"></div>
+                                    <div class="h-2 w-4/5 bg-slate-100 rounded-full opacity-40"></div>
+                                </div>
+                                <div class="mt-4 pt-3 border-t border-slate-50 flex items-center justify-between">
+                                    <div class="flex gap-1">
+                                        <div class="w-2 h-2 rounded-full bg-brand-200 animate-pulse"></div>
+                                        <div class="w-2 h-2 rounded-full bg-brand-100"></div>
+                                    </div>
+                                    <button class="bg-brand-600 text-white text-[9px] font-bold px-3 py-1.5 rounded-lg shadow-sm">Schedule Call</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Integrations Section: FIXED INFINITE SCROLL -->
+    <section class="py-24 overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-6 mb-12 text-center reveal-glass">
+            <h3 class="text-sm font-bold text-slate-400 uppercase tracking-[0.2em] mb-4">Integrations We Support</h3>
+        </div>
+        
+        <div class="relative w-full scroller-mask">
+            <div class="marquee-container animate-infinite-scroll">
+                <!-- Set 1 -->
+                <div class="flex items-center gap-8 px-4">
+                    <div class="flex items-center gap-4 glass-panel px-6 py-4 border-white/80 shrink-0 hover:border-brand-400 transition-colors">
+                        <i class="ph ph-map-pin text-2xl text-brand-600"></i>
+                        <span class="font-bold text-slate-700">TripAdvisor</span>
+                    </div>
+                    <div class="flex items-center gap-4 glass-panel px-6 py-4 border-white/80 shrink-0 hover:border-brand-400 transition-colors">
+                        <i class="ph ph-square-logo text-2xl text-brand-600"></i>
+                        <span class="font-bold text-slate-700">Square</span>
+                    </div>
+                    <div class="flex items-center gap-4 glass-panel px-6 py-4 border-white/80 shrink-0 hover:border-brand-400 transition-colors">
+                        <i class="ph ph-clover text-2xl text-brand-600"></i>
+                        <span class="font-bold text-slate-700">Clover</span>
+                    </div>
+                    <div class="flex items-center gap-4 glass-panel px-6 py-4 border-white/80 shrink-0 hover:border-brand-400 transition-colors">
+                        <i class="ph ph-lightning text-2xl text-brand-600"></i>
+                        <span class="font-bold text-slate-700">Lightspeed</span>
+                    </div>
+                    <div class="flex items-center gap-4 glass-panel px-6 py-4 border-white/80 shrink-0 hover:border-brand-400 transition-colors">
+                        <i class="ph ph-bread text-2xl text-brand-600"></i>
+                        <span class="font-bold text-slate-700">Toast</span>
+                    </div>
+                    <div class="flex items-center gap-4 glass-panel px-6 py-4 border-white/80 shrink-0 hover:border-brand-400 transition-colors">
+                        <i class="ph ph-moped text-2xl text-brand-600"></i>
+                        <span class="font-bold text-slate-700">DoorDash</span>
+                    </div>
+                    <div class="flex items-center gap-4 glass-panel px-6 py-4 border-white/80 shrink-0 hover:border-brand-400 transition-colors">
+                        <i class="ph ph-car text-2xl text-brand-600"></i>
+                        <span class="font-bold text-slate-700">Uber Eats</span>
+                    </div>
+                    <div class="flex items-center gap-4 glass-panel px-6 py-4 border-white/80 shrink-0 hover:border-brand-400 transition-colors">
+                        <i class="ph ph-hamburger text-2xl text-brand-600"></i>
+                        <span class="font-bold text-slate-700">Grubhub</span>
+                    </div>
+                    <div class="flex items-center gap-4 glass-panel px-6 py-4 border-white/80 shrink-0 hover:border-brand-400 transition-colors">
+                        <i class="ph ph-calendar-check text-2xl text-brand-600"></i>
+                        <span class="font-bold text-slate-700">OpenTable</span>
+                    </div>
+                    <div class="flex items-center gap-4 glass-panel px-6 py-4 border-white/80 shrink-0 hover:border-brand-400 transition-colors">
+                        <i class="ph ph-google-logo text-2xl text-brand-600"></i>
+                        <span class="font-bold text-slate-700">Google</span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal-glass">
+                <h3 class="text-4xl font-bold tracking-tight mb-4">Simple, Flexible Pricing</h3>
+                <p class="text-slate-600">Pricing plans for businesses at every stage of growth.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto items-center">
+                <!-- Free -->
+                <div class="glass-panel p-8 flex flex-col reveal-glass">
+                    <h4 class="text-xl font-bold mb-2">Free</h4>
+                    <p class="text-slate-500 text-sm mb-6">Get started at no cost</p>
+                    <div class="text-4xl font-bold mb-8">$0<span class="text-lg text-slate-400 font-normal">/mo</span></div>
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-center gap-3 text-sm text-slate-600"><i class="ph-fill ph-check-circle text-brand-400"></i> 400 AI credits</li>
+                        <li class="flex items-center gap-3 text-sm text-slate-600"><i class="ph-fill ph-check-circle text-brand-400"></i> Basic Templates</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-xl border-2 border-slate-200 text-charcoal font-semibold hover:border-brand-400 hover:bg-brand-50 transition-all">Get Started</button>
+                </div>
+
+                <!-- Plus -->
+                <div class="glass-panel-heavy p-8 flex flex-col relative transform md:-translate-y-4 shadow-2xl shimmer-wrapper !overflow-visible reveal-glass">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-600 text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest shadow-xl z-20 border border-brand-500">
+                        Most Popular
+                    </div>
+                    <h4 class="text-xl font-bold mb-2 text-brand-700">Plus</h4>
+                    <p class="text-slate-500 text-sm mb-6">Unlock more power</p>
+                    <div class="text-4xl font-bold mb-8">$22<span class="text-lg text-slate-400 font-normal">/mo</span></div>
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-center gap-3 text-sm font-medium"><i class="ph-fill ph-check-circle text-brand-600"></i> Unlimited AI credits</li>
+                        <li class="flex items-center gap-3 text-sm font-medium"><i class="ph-fill ph-check-circle text-brand-600"></i> Priority Support</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-xl bg-brand-600 text-white font-semibold hover:bg-brand-700 transition-all shadow-lg z-10">Start Free Trial</button>
+                </div>
+
+                <!-- Pro -->
+                <div class="glass-panel p-8 flex flex-col reveal-glass">
+                    <h4 class="text-xl font-bold mb-2">Pro</h4>
+                    <p class="text-slate-500 text-sm mb-6">Scale your operation</p>
+                    <div class="text-4xl font-bold mb-8">$69<span class="text-lg text-slate-400 font-normal">/mo</span></div>
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-center gap-3 text-sm text-slate-600"><i class="ph-fill ph-check-circle text-brand-400"></i> Custom AI Agents</li>
+                        <li class="flex items-center gap-3 text-sm text-slate-600"><i class="ph-fill ph-check-circle text-brand-400"></i> Advanced Analytics</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-xl border-2 border-slate-200 text-charcoal font-semibold hover:border-brand-400 hover:bg-brand-50 transition-all">Book a Demo</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join the AI Revolution CTA -->
+    <section class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="glass-panel-heavy p-12 md:p-16 relative overflow-hidden flex flex-col md:flex-row items-center gap-12 reveal-glass shadow-[0_40px_100px_-20px_rgba(34,197,94,0.15)]">
+                <div class="flex-1 text-center md:text-left z-10">
+                    <h4 class="text-xs font-bold text-brand-600 uppercase tracking-widest mb-4">Join the AI Revolution</h4>
+                    <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">Ready to Launch your <br/><span class="text-brand-600">AI Agents</span> with us?</h3>
+                    <div class="flex flex-col sm:flex-row gap-4 mt-8">
+                        <button class="bg-charcoal text-white px-8 py-4 rounded-full font-semibold hover:bg-brand-700 transition-all shadow-xl shadow-charcoal/20">
+                            Get Started
+                        </button>
+                        <button class="bg-white/50 border border-white px-8 py-4 rounded-full font-semibold hover:bg-white transition-all">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Animated Robot Visual -->
+                <div class="flex-1 flex justify-center items-center relative z-10 animate-float">
+                    <svg width="320" height="320" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="100" r="80" fill="url(#paint0_radial)" fill-opacity="0.2"/>
+                        <g class="robot-body">
+                            <rect x="60" y="80" width="80" height="70" rx="20" fill="white" fill-opacity="0.8" stroke="#E2E8F0" stroke-width="2"/>
+                            <rect x="70" y="90" width="60" height="40" rx="10" fill="#061614"/>
+                            <circle cx="100" cy="110" r="8" fill="#22C55E" class="animate-pulse-glow"/>
+                        </g>
+                        <g class="robot-head">
+                            <rect x="70" y="35" width="60" height="45" rx="15" fill="white" stroke="#E2E8F0" stroke-width="2"/>
+                            <circle cx="88" cy="55" r="4" class="robot-eye"/>
+                            <circle cx="112" cy="55" r="4" class="robot-eye"/>
+                            <line x1="100" y1="35" x2="100" y2="25" stroke="#E2E8F0" stroke-width="2"/>
+                            <circle cx="100" cy="22" r="3" fill="#22C55E" class="animate-pulse"/>
+                        </g>
+                        <defs>
+                            <radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(100 100) rotate(90) scale(80)">
+                                <stop stop-color="#22C55E"/>
+                                <stop offset="1" stop-color="#22C55E" stop-opacity="0"/>
+                            </radialGradient>
+                        </defs>
+                    </svg>
+                    <div class="absolute top-10 right-4 glass-panel px-4 py-2 text-[10px] font-bold text-brand-600 shadow-xl border-brand-100 flex items-center gap-2">
+                        <div class="w-1.5 h-1.5 rounded-full bg-brand-500 animate-ping"></div>
+                        AGENT ONLINE
+                    </div>
+                </div>
+                <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-brand-200/20 rounded-full blur-3xl pointer-events-none"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-brand-100 bg-white/20 backdrop-blur-md mt-12 py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2 font-bold text-xl tracking-tight">
+                <i class="ph-fill ph-paper-plane-tilt text-brand-500 text-2xl"></i>
+                <span>GetSetReply</span>
+            </div>
+            <p class="text-sm text-slate-500">© 2026 GetSetReply. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- GSAP & Animations Script -->
+    <script>
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smooth: true,
+        })
+        lenis.on('scroll', ScrollTrigger.update)
+        gsap.ticker.add((time)=>{ lenis.raf(time * 1000) })
+
+        const heroTl = gsap.timeline();
+        heroTl.from(".hero-text > *", { y: 30, opacity: 0, duration: 0.8, stagger: 0.15, ease: "power3.out", delay: 0.2 })
+        .from(".floating-element-1", { y: 50, opacity: 0, rotationX: 10, filter: "blur(20px)", duration: 1, ease: "power2.out" }, "-=0.6")
+        .from(".floating-element-2", { x: -40, opacity: 0, filter: "blur(20px)", duration: 1, ease: "back.out(1.2)" }, "-=0.5")
+        .from(".floating-element-3", { x: 40, opacity: 0, filter: "blur(20px)", duration: 1, ease: "back.out(1.2)" }, "-=0.7");
+
+        gsap.to(".floating-element-1", { y: -15, duration: 4, repeat: -1, yoyo: true, ease: "sine.inOut" });
+        gsap.to(".robot-head", { rotation: 5, duration: 2, repeat: -1, yoyo: true, ease: "sine.inOut" });
+
+        gsap.utils.toArray('.reveal-glass').forEach(elem => {
+            gsap.fromTo(elem, { autoAlpha: 0, y: 50, filter: "blur(15px)" }, {
+                autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 1, ease: "power3.out",
+                scrollTrigger: { trigger: elem, start: "top 85%", toggleActions: "play none none reverse" }
+            });
+        });
+    </script>
+</body>
+</html>
