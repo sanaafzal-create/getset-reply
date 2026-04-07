@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GetSetReply - The AI Agent Platform</title>
+    
+    <!-- Fonts: General Sans via Fontshare -->
+    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- GSAP & Lenis Smooth Scroll -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['General Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        charcoal: '#061614',
+                        snow: '#F9FAFB',
+                        brand: {
+                            50: '#F0FDF4',
+                            100: '#DCFCE7',
+                            200: '#BBF7D0',
+                            400: '#4ADE80',
+                            500: '#22C55E',
+                            600: '#16A34A',
+                            700: '#15803D',
+                        },
+                        accent: {
+                            mint: '#A7F3D0',
+                            forest: '#064E3B',
+                            teal: '#0D9488'
+                        }
+                    },
+                    animation: {
+                        blob: "blob 10s infinite",
+                        shimmer: "shimmer 3s infinite",
+                        'spin-slow': 'spin 8s linear infinite',
+                        'infinite-scroll': 'infinite-scroll 40s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            "0%": { transform: "translate(0px, 0px) scale(1)" },
+                            "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                            "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                            "100%": { transform: "translate(0px, 0px) scale(1)" }
+                        },
+                        shimmer: {
+                            "0%": { transform: "translateX(-100%)" },
+                            "100%": { transform: "translateX(100%)" }
+                        },
+                        'infinite-scroll': {
+                            from: { transform: 'translateX(0)' },
+                            to: { transform: 'translateX(-50%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: '1', filter: 'drop-shadow(0 0 5px #22C55E)' },
+                            '50%': { opacity: '0.6', filter: 'drop-shadow(0 0 15px #22C55E)' },
+                        },
+                        'pulse-soft': {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.4' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        body {
+            background-color: #F8FAFC;
+            color: #061614;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 40px -10px rgba(6, 78, 59, 0.05), inset 0 1px 0 rgba(255,255,255,0.9);
+            border-radius: 24px;
+        }
+
+        .glass-panel-heavy {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border: 1px solid rgba(255, 255, 255, 1);
+            box-shadow: 0 20px 40px -10px rgba(6, 78, 59, 0.08);
+            border-radius: 24px;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #061614 0%, #22C55E 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .bg-mesh-1 { background-color: #DCFCE7; }
+        .bg-mesh-2 { background-color: #ECFDF5; }
+        .bg-mesh-3 { background-color: #F0FDFA; }
+
+        .shimmer-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+        }
+        .shimmer-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+            animation: shimmer 3s infinite;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .reveal-glass { visibility: hidden; }
+
+        .scroller-mask {
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        }
+
+        .robot-head { transform-origin: center bottom; }
+        .robot-eye { fill: #22C55E; animation: pulse-glow 2s infinite; }
+        .robot-body { transform-origin: center center; }
+
+        /* Graphic Elements for Sales Outreach */
+        .dash-line {
+            stroke-dasharray: 6;
+            animation: dash-offset 20s linear infinite;
+        }
+        @keyframes dash-offset {
+            to { stroke-dashoffset: -200; }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-200 selection:text-charcoal">
+
+    <!-- Ambient Animated Mesh Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-mesh-1 mix-blend-multiply filter blur-[100px] opacity-60 animate-blob"></div>
+        <div class="absolute top-[20%] right-[-10%] w-[45vw] h-[45vw] rounded-full bg-mesh-2 mix-blend-multiply filter blur-[100px] opacity-60 animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-[-20%] left-[20%] w-[55vw] h-[55vw] rounded-full bg-mesh-3 mix-blend-multiply filter blur-[100px] opacity-60 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2 font-bold text-xl tracking-tight">
+                <i class="ph-fill ph-paper-plane-tilt text-brand-500 text-2xl"></i>
+                <span>GetSetReply</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+                <a href="index.html" class="hover:text-brand-600 transition-colors">Home</a>
+                <a href="features.html" class="hover:text-brand-600 transition-colors">Features</a>
+                <a href="#" class="hover:text-brand-600 transition-colors">Pricing</a>
+                
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="#" class="hidden md:block text-sm font-medium text-slate-600 hover:text-charcoal transition-colors">Sign in</a>
+                <button class="bg-charcoal text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-brand-700 transition-colors shadow-lg shadow-brand-700/20">
+                    Get Started
+                </button>
+            </div>
+        </div>
+    </nav>
+
+  <!-- Features Hero -->
+        <section class="px-6 py-20 text-center max-w-5xl mx-auto">
+            <div class="inline-block px-4 py-1.5 rounded-full bg-brand-100 text-brand-700 text-xs font-bold uppercase tracking-widest mb-6">Platform Capabilities</div>
+            <h1 class="text-5xl lg:text-7xl font-bold tracking-tight mb-8">Everything you need to <br/><span class="text-gradient">manage your reputation</span></h1>
+            <p class="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                From AI-powered response routing and deflection, to brand surveys and deep analytics — GetSetReply is the all-in-one platform built for reputation growth.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                    <button class="bg-brand-500 text-white px-8 py-4 rounded-full font-medium hover:bg-brand-600 transition-all shadow-xl shadow-brand-500/30 flex items-center justify-center gap-2 group">
+                        Start for free
+                        <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                    <button class="glass-panel px-8 py-4 rounded-full font-medium text-charcoal hover:bg-white/80 transition-all flex items-center justify-center gap-2">
+                        <i class="ph ph-play-circle text-xl"></i>
+                        See All features
+                    </button>
+                </div>
+        </section>
+
+    
+
+    <!-- Join the AI Revolution CTA -->
+    <section class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="glass-panel-heavy p-12 md:p-16 relative overflow-hidden flex flex-col md:flex-row items-center gap-12 reveal-glass shadow-[0_40px_100px_-20px_rgba(34,197,94,0.15)]">
+                <div class="flex-1 text-center md:text-left z-10">
+                    <h4 class="text-xs font-bold text-brand-600 uppercase tracking-widest mb-4">Join the AI Revolution</h4>
+                    <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">Start responding to <br/><span class="text-brand-600">Reviews</span> in minutes</h3>
+                    <p class="text-slate-600">Set up in minutes. Cancel anytime.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 mt-8">
+                        <button class="bg-charcoal text-white px-8 py-4 rounded-full font-semibold hover:bg-brand-700 transition-all shadow-xl shadow-charcoal/20">
+                            Start Free Trial
+                        </button>
+                        
+                    </div>
+                </div>
+
+                <!-- Animated Robot Visual -->
+                <div class="flex-1 flex justify-center items-center relative z-10 animate-float">
+                    <svg width="320" height="320" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="100" r="80" fill="url(#paint0_radial)" fill-opacity="0.2"/>
+                        <g class="robot-body">
+                            <rect x="60" y="80" width="80" height="70" rx="20" fill="white" fill-opacity="0.8" stroke="#E2E8F0" stroke-width="2"/>
+                            <rect x="70" y="90" width="60" height="40" rx="10" fill="#061614"/>
+                            <circle cx="100" cy="110" r="8" fill="#22C55E" class="animate-pulse-glow"/>
+                        </g>
+                        <g class="robot-head">
+                            <rect x="70" y="35" width="60" height="45" rx="15" fill="white" stroke="#E2E8F0" stroke-width="2"/>
+                            <circle cx="88" cy="55" r="4" class="robot-eye"/>
+                            <circle cx="112" cy="55" r="4" class="robot-eye"/>
+                            <line x1="100" y1="35" x2="100" y2="25" stroke="#E2E8F0" stroke-width="2"/>
+                            <circle cx="100" cy="22" r="3" fill="#22C55E" class="animate-pulse"/>
+                        </g>
+                        <defs>
+                            <radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(100 100) rotate(90) scale(80)">
+                                <stop stop-color="#22C55E"/>
+                                <stop offset="1" stop-color="#22C55E" stop-opacity="0"/>
+                            </radialGradient>
+                        </defs>
+                    </svg>
+                    <div class="absolute top-10 right-4 glass-panel px-4 py-2 text-[10px] font-bold text-brand-600 shadow-xl border-brand-100 flex items-center gap-2">
+                        <div class="w-1.5 h-1.5 rounded-full bg-brand-500 animate-ping"></div>
+                        AGENT ONLINE
+                    </div>
+                </div>
+                <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-brand-200/20 rounded-full blur-3xl pointer-events-none"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-brand-100 bg-white/20 backdrop-blur-md mt-12 py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2 font-bold text-xl tracking-tight">
+                <i class="ph-fill ph-paper-plane-tilt text-brand-500 text-2xl"></i>
+                <span>GetSetReply</span>
+            </div>
+            <p class="text-sm text-slate-500">© 2026 GetSetReply. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- GSAP & Animations Script -->
+    <script>
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smooth: true,
+        })
+        lenis.on('scroll', ScrollTrigger.update)
+        gsap.ticker.add((time)=>{ lenis.raf(time * 1000) })
+
+        const heroTl = gsap.timeline();
+        heroTl.from(".hero-text > *", { y: 30, opacity: 0, duration: 0.8, stagger: 0.15, ease: "power3.out", delay: 0.2 })
+        .from(".floating-element-1", { y: 50, opacity: 0, rotationX: 10, filter: "blur(20px)", duration: 1, ease: "power2.out" }, "-=0.6")
+        .from(".floating-element-2", { x: -40, opacity: 0, filter: "blur(20px)", duration: 1, ease: "back.out(1.2)" }, "-=0.5")
+        .from(".floating-element-3", { x: 40, opacity: 0, filter: "blur(20px)", duration: 1, ease: "back.out(1.2)" }, "-=0.7");
+
+        gsap.to(".floating-element-1", { y: -15, duration: 4, repeat: -1, yoyo: true, ease: "sine.inOut" });
+        gsap.to(".robot-head", { rotation: 5, duration: 2, repeat: -1, yoyo: true, ease: "sine.inOut" });
+
+        gsap.utils.toArray('.reveal-glass').forEach(elem => {
+            gsap.fromTo(elem, { autoAlpha: 0, y: 50, filter: "blur(15px)" }, {
+                autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 1, ease: "power3.out",
+                scrollTrigger: { trigger: elem, start: "top 85%", toggleActions: "play none none reverse" }
+            });
+        });
+    </script>
+</body>
+</html>

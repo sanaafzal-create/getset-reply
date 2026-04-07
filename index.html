@@ -183,8 +183,8 @@
                 <span>GetSetReply</span>
             </div>
             <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-                <a href="#" class="hover:text-brand-600 transition-colors">Home</a>
-                <a href="#" class="hover:text-brand-600 transition-colors">Features</a>
+                <a href="index.html" class="hover:text-brand-600 transition-colors active">Home</a>
+                <a href="features.html" class="hover:text-brand-600 transition-colors">Features</a>
                 <a href="#" class="hover:text-brand-600 transition-colors">Pricing</a>
                 
             </div>
@@ -223,6 +223,7 @@
                         See All features
                     </button>
                 </div>
+                <p class="text-slate-600 max-w-2xl mx-auto py-4">7-day free trial · No credit card required · Full access</p>
             </div>
 
             <!-- Right: Updated Review Case Study Composition -->
@@ -298,160 +299,153 @@
     </section>
 
    
-        <!-- Features Bento Grid -->
+       <!-- Features Bento Grid -->
     <section id="features" class="py-24 px-6 relative">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16 reveal-glass">
-                <h2 class="text-sm font-bold text-brand-600 uppercase tracking-widest mb-2">Built for modern review management</h2>
-                <!-- <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/60 border border-white backdrop-blur-md mb-6 shadow-sm">
-                    <span class="flex h-2 w-2 rounded-full bg-brand-500"></span>
-                    <span class="text-xs font-semibold text-slate-600 uppercase tracking-wider">AI-Driven Features</span>
-                </div> -->
-                <h3 class="text-6xl font-bold tracking-tight mb-4">Everything you Need,<br/>Nothing you Don't</h3>
+                <h2 class="text-sm font-bold text-brand-600 uppercase tracking-widest mb-2">AI-Driven Features</h2>
+                <h3 class="text-5xl font-bold tracking-tight mb-4">Everything you Need.<br/>Nothing you Don't</h3>
                 <p class="text-slate-600 max-w-2xl mx-auto">GetSetReply helps you eliminate bottlenecks, automate complex workflows, and make smarter decisions with AI agents working 24/7.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[320px]">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[340px]">
                 
-                <!-- Smart Automation Card (Animated Graphic) -->
+                <!-- Review Deflection Card -->
                 <div class="glass-panel p-8 md:col-span-2 flex flex-col group overflow-hidden relative reveal-glass">
                     <div class="relative z-10 flex flex-col md:flex-row gap-8 items-stretch h-full">
                         <div class="flex-1 py-4">
                             <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mb-6 shadow-sm">
-                                <i class="ph ph-arrows-merge text-2xl text-brand-600"></i>
+                                <i class="ph ph-shield-check text-2xl text-brand-600"></i>
                             </div>
-                            <h4 class="text-2xl font-bold mb-2">Smart Automation</h4>
+                            <h4 class="text-2xl font-bold mb-2">Review Deflection</h4>
                             <p class="text-slate-600 max-w-md text-sm lg:text-base leading-relaxed">
-                                Empowering you with AI-driven workflows designed to simplify operations and enhance productivity instantly.
+                                Route happy customers to review sites. Capture unhappy feedback privately before it goes public.
                             </p>
                         </div>
 
-                        <!-- Workflow Builder Graphic -->
-                        <div class="flex-1 relative flex items-center justify-center min-h-[220px]">
-                            <svg class="absolute inset-0 w-full h-full -z-10" viewBox="0 0 300 200">
-                                <!-- Paths with dash animation -->
-                                <path d="M50,60 Q100,60 140,100" stroke="#DCFCE7" stroke-width="2" fill="none" class="animated-path" />
-                                <path d="M50,100 L140,100" stroke="#BBF7D0" stroke-width="2" fill="none" class="animated-path" style="animation-delay: 0.5s" />
-                                <path d="M50,140 Q100,140 140,100" stroke="#DCFCE7" stroke-width="2" fill="none" class="animated-path" style="animation-delay: 1s" />
-                                <path d="M160,100 L240,100" stroke="#22C55E" stroke-width="3" stroke-dasharray="6 4" fill="none" class="animated-path" />
-                            </svg>
-
-                            <!-- Input Sources -->
-                            <div class="absolute left-4 space-y-4">
-                                <div class="glass-panel p-2 shadow-sm flex items-center gap-2 group-hover:translate-x-2 transition-transform">
-                                    <i class="ph ph-google-logo text-brand-600 text-xs"></i>
-                                    <div class="h-1.5 w-8 bg-brand-100 rounded-full"></div>
+                        <!-- Deflection Graphic -->
+                        <div class="flex-1 relative flex items-center justify-center bg-slate-50/50 rounded-2xl overflow-hidden">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <!-- Flow Animation -->
+                                <svg class="w-full h-full opacity-30" viewBox="0 0 200 200">
+                                    <path d="M20,100 Q60,100 80,60 T140,20" fill="none" stroke="#22C55E" stroke-width="2" stroke-dasharray="4 4" class="animated-path" />
+                                    <path d="M20,100 Q60,100 80,140 T140,180" fill="none" stroke="#EF4444" stroke-width="2" stroke-dasharray="4 4" class="animated-path" style="animation-delay: -1s" />
+                                </svg>
+                            </div>
+                            
+                            <!-- Central Filter Node -->
+                            <div class="z-20 glass-panel-heavy p-4 shadow-xl flex flex-col items-center gap-2 border-brand-100 scale-90 md:scale-100">
+                                <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center shadow-lg animate-pulse-glow">
+                                    <i class="ph ph-funnel text-xl"></i>
                                 </div>
-                                <div class="glass-panel p-2 shadow-sm flex items-center gap-2 group-hover:translate-x-4 transition-transform delay-75">
-                                    <i class="ph ph-facebook-logo text-blue-500 text-xs"></i>
-                                    <div class="h-1.5 w-10 bg-slate-100 rounded-full"></div>
-                                </div>
-                                <div class="glass-panel p-2 shadow-sm flex items-center gap-2 group-hover:translate-x-2 transition-transform delay-150">
-                                    <i class="ph ph-instagram-logo text-pink-500 text-xs"></i>
-                                    <div class="h-1.5 w-6 bg-slate-100 rounded-full"></div>
-                                </div>
+                                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">Sentiment Filter</span>
                             </div>
 
-                            <!-- Central AI Node -->
-                            <div class="glass-panel-heavy p-5 shadow-2xl rounded-3xl border-brand-100 flex flex-col items-center gap-2 z-20 group-hover:scale-110 transition-transform duration-500">
-                                <div class="w-10 h-10 rounded-full bg-charcoal flex items-center justify-center animate-spin-slow shadow-lg">
-                                    <i class="ph ph-circles-three-plus text-brand-400 text-xl"></i>
+                            <!-- Outcome Bubbles -->
+                            <div class="absolute top-6 right-6 glass-panel p-2 shadow-lg border-l-4 border-l-brand-500 group-hover:translate-y-1 transition-transform">
+                                <div class="flex items-center gap-2">
+                                    <i class="ph ph-google-logo text-brand-600"></i>
+                                    <div class="flex text-[8px] text-amber-400"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div>
                                 </div>
-                                <span class="text-[9px] font-bold tracking-tighter text-slate-800">AUTOMATING</span>
+                                <span class="text-[8px] font-bold text-slate-400">Public Review</span>
                             </div>
 
-                            <!-- Output Node -->
-                            <div class="absolute right-4 glass-panel-heavy p-3 shadow-xl border-l-4 border-l-brand-600 group-hover:-translate-x-2 transition-transform duration-500">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <div class="w-4 h-4 rounded bg-brand-500 flex items-center justify-center">
-                                        <i class="ph ph-check text-[10px] text-white"></i>
-                                    </div>
-                                    <span class="text-[9px] font-bold text-slate-700">TASK DONE</span>
+                            <div class="absolute bottom-6 right-6 glass-panel p-2 shadow-lg border-l-4 border-l-red-400 group-hover:-translate-y-1 transition-transform">
+                                <div class="flex items-center gap-2">
+                                    <i class="ph ph-envelope text-red-500"></i>
+                                    <span class="text-[9px] font-bold text-slate-700">Support Ticket</span>
                                 </div>
-                                <div class="h-1.5 w-16 bg-brand-50 rounded-full"></div>
+                                <span class="text-[8px] font-bold text-slate-400">Private Feedback</span>
+                            </div>
+                            
+                            <!-- Input Bubble -->
+                            <div class="absolute left-4 glass-panel p-2 shadow-md animate-float">
+                                <i class="ph ph-chat-centered-text text-brand-600"></i>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Adaptive Learning Card -->
+                <!-- Outreach & Campaigns Card -->
                 <div class="glass-panel p-8 flex flex-col justify-between group overflow-hidden relative reveal-glass">
                     <div class="relative z-10">
                         <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mb-6 shadow-sm">
-                            <i class="ph ph-brain text-2xl text-teal-600"></i>
+                            <i class="ph ph-megaphone text-2xl text-teal-600"></i>
                         </div>
-                        <h4 class="text-xl font-bold mb-2">Adaptive Learning</h4>
-                        <p class="text-slate-600 text-sm">AI that evolves with your data, continuously improving performance.</p>
+                        <h4 class="text-xl font-bold mb-2">Outreach & Campaigns</h4>
+                        <p class="text-slate-600 text-sm">Proactively gather reviews via SMS, email, and QR codes. Import contacts from your POS.</p>
+                    </div>
+                    <div class="mt-8 flex gap-2">
+                        <div class="px-2 py-1 bg-white border rounded text-[10px] font-bold text-slate-400">SMS</div>
+                        <div class="px-2 py-1 bg-white border rounded text-[10px] font-bold text-slate-400">EMAIL</div>
+                        <div class="px-2 py-1 bg-white border rounded text-[10px] font-bold text-slate-400">POS</div>
                     </div>
                 </div>
 
-                <!-- Predictive Analytics Card -->
+                <!-- Analytics & Insights Card -->
                 <div class="glass-panel p-8 flex flex-col justify-between group overflow-hidden relative reveal-glass">
                     <div class="relative z-10">
                         <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mb-6 shadow-sm">
-                            <i class="ph ph-chart-line-up text-2xl text-brand-600"></i>
+                            <i class="ph ph-chart-pie text-2xl text-brand-600"></i>
                         </div>
-                        <h4 class="text-xl font-bold mb-2">Predictive Analytics</h4>
-                        <p class="text-slate-600 text-sm">Harness advanced models to forecast trends and uncover insights.</p>
+                        <h4 class="text-xl font-bold mb-2">Analytics & Insights</h4>
+                        <p class="text-slate-600 text-sm">Sentiment analysis, competitor tracking, and AI-powered insights to understand your reviews.</p>
+                    </div>
+                    <div class="h-16 w-full flex items-end gap-1 mt-4">
+                        <div class="flex-1 bg-brand-100 rounded-t h-1/2"></div>
+                        <div class="flex-1 bg-brand-200 rounded-t h-3/4"></div>
+                        <div class="flex-1 bg-brand-500 rounded-t h-full"></div>
+                        <div class="flex-1 bg-brand-300 rounded-t h-2/3"></div>
                     </div>
                 </div>
 
-                <!-- Sales Outreach Card (Animated Graphic) -->
-                <div class="glass-panel p-8 md:col-span-2 flex flex-col justify-between group overflow-hidden relative reveal-glass">
+                <!-- AI Personalities Card -->
+                <div class="glass-panel p-8 md:col-span-2 flex flex-col group overflow-hidden relative reveal-glass">
                     <div class="relative z-10 flex flex-col md:flex-row gap-8 items-stretch h-full">
                         <div class="flex-1 py-4">
                             <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mb-6 shadow-sm">
-                                <i class="ph ph-envelope-simple-open text-2xl text-emerald-600"></i>
+                                <i class="ph ph-mask-happy text-2xl text-brand-700"></i>
                             </div>
-                            <h4 class="text-2xl font-bold mb-2">Sales Outreach</h4>
-                            <p class="text-slate-600 text-sm lg:text-base">Personalize campaigns at scale, nurture leads, and close deals faster with AI-driven engagement flows.</p>
+                            <h4 class="text-2xl font-bold mb-2">AI Personalities</h4>
+                            <p class="text-slate-600 text-sm lg:text-base leading-relaxed">
+                                7 presets, custom personalities, and AI Clone trained on your actual responses.
+                            </p>
                         </div>
                         
-                        <!-- Animated Outreach Graphic -->
-                        <div class="flex-1 relative flex items-center justify-center min-h-[220px]">
-                            <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 300 200">
-                                <path d="M60,60 C120,60 180,140 240,140" fill="none" stroke="#DCFCE7" stroke-width="2" stroke-dasharray="6 4" class="animated-path" />
-                                <circle cx="60" cy="60" r="3" fill="#22C55E" class="animate-pulse" />
-                                <circle cx="240" cy="140" r="3" fill="#22C55E" class="animate-pulse" />
-                            </svg>
-
-                            <div class="absolute top-4 left-4 glass-panel p-2 shadow-lg border-brand-100 flex items-center gap-2 transform group-hover:scale-105 transition-transform">
-                                <div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden flex items-center justify-center">
-                                    <i class="ph-fill ph-user text-slate-400"></i>
+                        <!-- Personality Visualizer -->
+                        <div class="flex-1 relative flex flex-col justify-center gap-6 bg-slate-50/50 rounded-2xl p-6 overflow-hidden">
+                            <!-- Preset Picker -->
+                            <div class="flex justify-between items-center bg-white/80 p-3 rounded-xl border border-white shadow-sm">
+                                <div class="flex gap-2">
+                                    <div class="w-6 h-6 rounded-full bg-blue-100 persona-orb flex items-center justify-center text-blue-600 text-xs shadow-sm cursor-pointer" title="Professional"><i class="ph-fill ph-briefcase"></i></div>
+                                    <div class="w-6 h-6 rounded-full bg-brand-100 persona-orb flex items-center justify-center text-brand-600 text-xs shadow-sm cursor-pointer" title="Friendly"><i class="ph-fill ph-smiley"></i></div>
+                                    <div class="w-6 h-6 rounded-full bg-amber-100 persona-orb flex items-center justify-center text-amber-600 text-xs shadow-sm cursor-pointer" title="Witty"><i class="ph-fill ph-lightning"></i></div>
+                                    <div class="w-6 h-6 rounded-full bg-purple-100 persona-orb flex items-center justify-center text-purple-600 text-xs shadow-sm cursor-pointer" title="Custom"><i class="ph-fill ph-fingerprint"></i></div>
                                 </div>
-                                <div class="pr-2">
-                                    <div class="h-2 w-12 bg-slate-200 rounded-full mb-1"></div>
-                                    <div class="h-1.5 w-16 bg-slate-100 rounded-full"></div>
-                                </div>
+                                <span class="text-[10px] font-bold text-brand-600 bg-brand-50 px-2 py-1 rounded">FRIENDLY MODE</span>
                             </div>
 
-                            <div class="absolute bottom-4 right-4 glass-panel p-2 shadow-lg border-brand-100 flex items-center gap-2 transform group-hover:scale-105 transition-transform delay-75">
-                                <div class="w-8 h-8 rounded-full bg-brand-100 overflow-hidden flex items-center justify-center">
-                                    <i class="ph-fill ph-user text-brand-400"></i>
+                            <!-- Neural Clone Progress -->
+                            <div class="glass-panel-heavy p-4 shadow-xl border-l-4 border-l-brand-500">
+                                <div class="flex justify-between items-center mb-3">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-5 h-5 rounded bg-charcoal flex items-center justify-center"><i class="ph ph-cpu text-[10px] text-brand-400"></i></div>
+                                        <span class="text-[9px] font-bold uppercase tracking-tight">AI Neural Clone</span>
+                                    </div>
+                                    <span class="text-[10px] font-bold text-brand-600">82% Trained</span>
                                 </div>
-                                <div class="pr-2">
-                                    <div class="h-2 w-12 bg-brand-200 rounded-full mb-1"></div>
-                                    <div class="h-1.5 w-16 bg-brand-50 rounded-full"></div>
+                                <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                    <div class="h-full bg-brand-500 w-[82%] animate-pulse"></div>
                                 </div>
+                                <p class="text-[8px] text-slate-400 mt-2 font-medium">Learning from 1,420 previous responses...</p>
                             </div>
 
-                            <div class="glass-panel-heavy p-4 shadow-2xl border-l-4 border-l-brand-500 w-full max-w-[240px] z-20 group-hover:-translate-y-2 transition-transform duration-500 animate-float">
-                                <div class="flex items-center gap-2 mb-3">
-                                    <div class="w-5 h-5 rounded bg-brand-600 flex items-center justify-center">
-                                        <i class="ph ph-sparkle text-[10px] text-white"></i>
-                                    </div>
-                                    <span class="text-[9px] font-bold text-brand-700 uppercase tracking-tight">AI Drafting...</span>
-                                </div>
-                                <div class="space-y-2">
-                                    <div class="h-2 w-full bg-slate-100 rounded-full opacity-60"></div>
-                                    <div class="h-2 w-4/5 bg-slate-100 rounded-full opacity-40"></div>
-                                </div>
-                                <div class="mt-4 pt-3 border-t border-slate-50 flex items-center justify-between">
-                                    <div class="flex gap-1">
-                                        <div class="w-2 h-2 rounded-full bg-brand-200 animate-pulse"></div>
-                                        <div class="w-2 h-2 rounded-full bg-brand-100"></div>
-                                    </div>
-                                    <button class="bg-brand-600 text-white text-[9px] font-bold px-3 py-1.5 rounded-lg shadow-sm">Schedule Call</button>
+                            <!-- Response Sample -->
+                            <div class="absolute -right-10 top-0 opacity-20 scale-75 blur-[1px] rotate-6 group-hover:rotate-3 transition-transform duration-700">
+                                <div class="glass-panel p-4 w-48">
+                                    <div class="h-2 w-12 bg-slate-200 rounded mb-2"></div>
+                                    <div class="h-2 w-full bg-slate-100 rounded mb-1"></div>
+                                    <div class="h-2 w-3/4 bg-slate-100 rounded"></div>
                                 </div>
                             </div>
                         </div>
@@ -518,11 +512,140 @@
         </div>
     </section>
 
+    <!-- Analytics Section (New) -->
+    <section id="analytics" class="py-24 px-6 relative overflow-hidden bg-brand-50/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <!-- Data Visual -->
+                <div class="order-2 lg:order-1 relative h-[500px] flex items-center justify-center analytics-visual">
+                    <div class="w-full glass-panel-heavy p-8 relative z-10 border-white/80 shadow-2xl overflow-hidden">
+                        <!-- Dashboard Header -->
+                        <div class="flex justify-between items-start mb-8">
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Growth & Sentiment</h4>
+                                <div class="text-3xl font-bold flex items-center gap-2">
+                                    4.92 <i class="ph-fill ph-star text-amber-400 text-xl"></i>
+                                    <span class="text-xs text-brand-500 font-medium bg-brand-50 px-2 py-0.5 rounded-full">+12% vs last mo</span>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <div class="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center border border-slate-100"><i class="ph ph-calendar text-slate-400"></i></div>
+                                <div class="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center border border-slate-100"><i class="ph ph-dots-three-outline-vertical text-slate-400"></i></div>
+                            </div>
+                        </div>
+
+                        <!-- Animated SVG Chart -->
+                        <div class="relative h-48 w-full mt-4">
+                            <svg class="w-full h-full overflow-visible" viewBox="0 0 400 100" preserveAspectRatio="none">
+                                <defs>
+                                    <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#22C55E" stop-opacity="0.2" />
+                                        <stop offset="100%" stop-color="#22C55E" stop-opacity="0" />
+                                    </linearGradient>
+                                </defs>
+                                <!-- Grid -->
+                                <line x1="0" y1="0" x2="400" y2="0" stroke="#f1f5f9" stroke-width="1" />
+                                <line x1="0" y1="50" x2="400" y2="50" stroke="#f1f5f9" stroke-width="1" />
+                                <line x1="0" y1="100" x2="400" y2="100" stroke="#f1f5f9" stroke-width="1" />
+                                
+                                <!-- Area -->
+                                <path d="M0,80 L40,75 L80,90 L120,40 L160,60 L200,30 L240,50 L280,10 L320,40 L360,5 L400,20 L400,100 L0,100 Z" fill="url(#areaGradient)" />
+                                
+                                <!-- Line Path -->
+                                <path class="chart-path" d="M0,80 L40,75 L80,90 L120,40 L160,60 L200,30 L240,50 L280,10 L320,40 L360,5 L400,20" fill="none" stroke="#22C55E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                
+                                <!-- Nodes -->
+                                <circle cx="280" cy="10" r="4" fill="#22C55E" class="animate-pulse shadow-glow" />
+                                <circle cx="360" cy="5" r="4" fill="#22C55E" class="animate-pulse shadow-glow" />
+                            </svg>
+                        </div>
+
+                        <!-- Stats Row -->
+                        <div class="grid grid-cols-3 gap-4 mt-8">
+                            <div class="p-3 bg-slate-50/50 rounded-xl border border-white/50">
+                                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter mb-1">Engaged</div>
+                                <div class="text-xl font-bold">12.4k</div>
+                            </div>
+                            <div class="p-3 bg-slate-50/50 rounded-xl border border-white/50">
+                                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter mb-1">Time Saved</div>
+                                <div class="text-xl font-bold">482h</div>
+                            </div>
+                            <div class="p-3 bg-slate-50/50 rounded-xl border border-white/50">
+                                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter mb-1">Sentiment</div>
+                                <div class="text-xl font-bold text-brand-600">98%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Insights Card -->
+                    <div class="absolute -right-6 -bottom-6 w-64 glass-panel-heavy p-5 z-20 shadow-2xl animate-float border-brand-100 border-2">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-8 h-8 rounded-full bg-charcoal flex items-center justify-center text-brand-400 shadow-lg">
+                                <i class="ph-fill ph-sparkle text-sm"></i>
+                            </div>
+                            <span class="text-xs font-bold uppercase tracking-tight">AI Insights</span>
+                        </div>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-500 mt-1.5 shrink-0"></span>
+                                <p class="text-[11px] font-medium text-slate-600">"Food Quality" sentiment has increased by 14% this week.</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0"></span>
+                                <p class="text-[11px] font-medium text-slate-600">2 reviews mentioned long wait times on Friday night.</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-500 mt-1.5 shrink-0"></span>
+                                <p class="text-[11px] font-medium text-slate-600">Competitor "Pizza Palace" dropped in ranking.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="order-1 lg:order-2 reveal-glass">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 border border-brand-200 mb-6">
+                        <i class="ph-fill ph-trend-up text-brand-700 text-xs"></i>
+                        <span class="text-[10px] font-bold text-brand-700 uppercase tracking-widest">Business Intelligence</span>
+                    </div>
+                    <h2 class="text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1] mb-6">
+                        Turn Every Word into <br/>
+                        <span class="text-gradient">Actionable Strategy</span>
+                    </h2>
+                    <p class="text-lg text-slate-600 mb-8 leading-relaxed">
+                        Don't just reply—understand. GetSetReply's advanced analytics engine parses thousands of reviews to find patterns your team might miss.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-5">
+                            <div class="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center shrink-0 border border-slate-100">
+                                <i class="ph-fill ph-waveform text-brand-600 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-lg mb-1">Sentiment Trends</h4>
+                                <p class="text-sm text-slate-500 leading-relaxed">Map out customer emotions over time to see exactly how your service improvements impact your reputation.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-5">
+                            <div class="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center shrink-0 border border-slate-100">
+                                <i class="ph-fill ph-target text-brand-600 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-lg mb-1">Topic Extraction</h4>
+                                <p class="text-sm text-slate-500 leading-relaxed">Our AI automatically flags frequently mentioned topics—like staff friendliness or pricing—so you can act fast.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Pricing Section -->
     <section id="pricing" class="py-24 px-6">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16 reveal-glass">
-                <h3 class="text-6xl font-bold tracking-tight mb-4">Simple, Flexible Pricing</h3>
+                <h3 class="text-5xl font-bold tracking-tight mb-4">Simple, Flexible Pricing</h3>
                 <p class="text-slate-600">Pricing plans for businesses at every stage of growth.</p>
             </div>
 
@@ -575,14 +698,13 @@
             <div class="glass-panel-heavy p-12 md:p-16 relative overflow-hidden flex flex-col md:flex-row items-center gap-12 reveal-glass shadow-[0_40px_100px_-20px_rgba(34,197,94,0.15)]">
                 <div class="flex-1 text-center md:text-left z-10">
                     <h4 class="text-xs font-bold text-brand-600 uppercase tracking-widest mb-4">Join the AI Revolution</h4>
-                    <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">Ready to Launch your <br/><span class="text-brand-600">AI Agents</span> with us?</h3>
+                    <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">Start responding to <br/><span class="text-brand-600">Reviews</span> in minutes</h3>
+                    <p class="text-slate-600">Set up in minutes. Cancel anytime.</p>
                     <div class="flex flex-col sm:flex-row gap-4 mt-8">
                         <button class="bg-charcoal text-white px-8 py-4 rounded-full font-semibold hover:bg-brand-700 transition-all shadow-xl shadow-charcoal/20">
-                            Get Started
+                            Start Free Trial
                         </button>
-                        <button class="bg-white/50 border border-white px-8 py-4 rounded-full font-semibold hover:bg-white transition-all">
-                            Learn More
-                        </button>
+                        
                     </div>
                 </div>
 
