@@ -169,6 +169,11 @@
         @keyframes dash-offset {
             to { stroke-dashoffset: -200; }
         }
+
+        .analysis-engine-border {
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            background: rgba(240, 253, 244, 0.4);
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-brand-200 selection:text-charcoal">
@@ -231,70 +236,71 @@
                 <p class="text-slate-600 max-w-2xl mx-auto py-4">7-day free trial · No credit card required · Full access</p>
             </div>
 
-            <!-- Right: Updated Review Case Study Composition -->
-            <div class="relative h-[500px] w-full z-10 hero-visual perspective-1000">
-                <!-- Base Dashboard Glass -->
-                <div class="absolute inset-4 glass-panel p-6 floating-element-1">
-                    <div class="flex items-center justify-between border-b border-white/50 pb-4 mb-4">
+            <!-- Right: Flowing Review -> Analysis -> Response Graphic -->
+            <div class="relative w-full z-10 hero-visual perspective-1000 flex flex-col gap-4">
+                
+                <!-- 1. Incoming Review -->
+                <div class="glass-panel-heavy p-5 rounded-2xl shadow-xl floating-element-2 border-t-4 border-t-amber-400 relative z-30">
+                    <div class="flex items-center justify-between mb-3">
                         <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-brand-500/10 flex items-center justify-center">
-                                <i class="ph ph-star text-brand-600"></i>
+                            <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-400 text-xs">DL</div>
+                            <div>
+                                <h4 class="text-xs font-bold">David L.</h4>
+                                <div class="flex text-amber-400 text-[9px]"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph ph-star text-slate-300"></i></div>
                             </div>
-                            <span class="text-sm font-bold">Review Pipeline</span>
                         </div>
-                        <div class="flex gap-1.5">
-                            <div class="w-2.5 h-2.5 rounded-full bg-brand-400"></div>
-                            <div class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></div>
-                        </div>
+                        <span class="text-[9px] font-medium text-slate-400">Google • 12 days ago</span>
                     </div>
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-end">
-                            <div class="space-y-2 w-1/2">
-                                <div class="h-2.5 bg-slate-200 rounded-full w-full"></div>
-                                <div class="h-2.5 bg-slate-100 rounded-full w-2/3"></div>
-                            </div>
-                            <!-- <div class="h-12 w-12 rounded-full border-4 border-brand-500 border-t-transparent animate-spin-slow"></div> -->
-                        </div>
-                        <div class="grid grid-cols-2 gap-3 pt-4">
-                            <div class="h-16 bg-white/40 rounded-xl border border-white/60 p-3">
-                                <div class="h-2 w-8 bg-brand-200 rounded-full mb-2"></div>
-                                <div class="h-4 w-12 bg-charcoal/10 rounded-lg"></div>
-                            </div>
-                            <div class="h-16 bg-white/40 rounded-xl border border-white/60 p-3">
-                                <div class="h-2 w-8 bg-amber-200 rounded-full mb-2"></div>
-                                <div class="h-4 w-12 bg-charcoal/10 rounded-lg"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Floating Chat Bubble Left (The Customer Review) -->
-                <div class="absolute -left-4 top-10 glass-panel-heavy p-4 max-w-[280px] shadow-2xl floating-element-2 border-l-4 border-l-amber-400 z-20">
-                    <div class="flex items-center gap-1 mb-2 text-amber-400">
-                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph ph-star"></i>
-                    </div>
-                    <p class="text-xs font-semibold text-slate-800 leading-relaxed italic">
-                        "The delivery was a bit late, but the product quality exceeded my expectations. Wish tracking was better."
+                    <p class="text-xs text-slate-700 leading-relaxed font-medium">
+                        "Solid restaurant with great farm-to-table options. The seasonal menu keeps things interesting. A bit pricey but worth it."
                     </p>
-                    <p class="text-[10px] text-slate-400 mt-2 font-medium">— Sarah M. on Google</p>
                 </div>
 
-                <!-- Floating Chat Bubble Right (The AI Response) -->
-                <div class="absolute -right-4 bottom-20 glass-panel-heavy p-5 max-w-sm shadow-2xl floating-element-3 border-l-4 border-l-brand-500 z-30">
-                    <div class="flex items-start gap-3">
-                        <div class="w-9 h-9 rounded-full bg-charcoal flex items-center justify-center text-white shrink-0 shadow-lg">
-                            <i class="ph ph-sparkle text-brand-400"></i>
+                <!-- 2. AI Analysis Engine (The Middle Step) -->
+                <div class="glass-panel p-5 rounded-2xl analysis-engine-border shadow-lg relative z-20 floating-element-1 ml-6 lg:ml-12">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i class="ph-bold ph-sparkle text-brand-600 text-sm"></i>
+                        <span class="text-[10px] font-bold text-brand-700 uppercase tracking-widest">AI Analysis Engine</span>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] font-bold text-slate-500 shrink-0">Sentiment:</span>
+                            <span class="text-[10px] font-bold text-brand-600 bg-brand-100 px-2 py-0.5 rounded">Positive</span>
+                            <span class="text-[10px] text-slate-400 italic shrink-0">— praised farm-to-table & value</span>
                         </div>
-                        <div class="space-y-3">
-                            <div class="flex items-center gap-2">
+                        <div class="flex flex-col gap-1">
+                            <span class="text-[10px] font-bold text-slate-500">Response Strategy:</span>
+                            <p class="text-[10px] text-slate-600 leading-relaxed">
+                                Lead with appreciation for the farm-to-table feedback. Avoid discussing price directly; focus on quality and uniqueness.
+                            </p>
+                        </div>
+                        <!-- Progress Visual -->
+                        <div class="w-full h-1 bg-brand-100 rounded-full overflow-hidden mt-1">
+                            <div class="h-full bg-brand-500 w-full origin-left animate-[shimmer_3s_infinite]"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Final AI Response Draft -->
+                <div class="glass-panel-heavy p-5 rounded-2xl shadow-2xl border-l-4 border-l-brand-500 relative z-30 ml-12 lg:ml-24 floating-element-3">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-charcoal flex items-center justify-center text-white shrink-0 shadow-lg">
+                            <i class="ph ph-chat-centered-dots text-brand-400"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between mb-2">
                                 <span class="text-[10px] font-bold text-brand-600 bg-brand-50 px-2 py-0.5 rounded uppercase">AI Draft Ready</span>
+                                <div class="flex gap-1">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
+                                    <div class="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
+                                </div>
                             </div>
-                            <p class="text-xs font-medium text-slate-700 leading-relaxed">
-                                "Hi Sarah! Thanks for the 4 stars. We're sorry about the delivery delay. We've just updated our tracking system to ensure a smoother experience next time!"
+                            <p class="text-[11px] font-medium text-slate-700 leading-relaxed mb-4">
+                                "Hi David! We're thrilled you enjoyed our farm-to-table selections. We put a lot of heart into our seasonal menu, and we're so glad it hit the mark for your special occasion. Hope to see you again soon!"
                             </p>
                             <div class="flex gap-2">
-                                <button class="text-[10px] bg-brand-600 text-white px-4 py-1.5 rounded-full shadow-sm font-bold hover:bg-brand-700 transition-colors">Post Reply</button>
-                                <button class="text-[10px] bg-white text-slate-600 px-4 py-1.5 rounded-full border border-slate-200 shadow-sm font-bold">Edit</button>
+                                <button class="text-[10px] bg-brand-600 text-white px-4 py-1.5 rounded-full font-bold shadow-md hover:bg-brand-700 transition-colors">Post Reply</button>
+                                <button class="text-[10px] bg-white text-slate-500 px-4 py-1.5 rounded-full border border-slate-100 font-bold">Edit</button>
                             </div>
                         </div>
                     </div>
@@ -343,14 +349,14 @@
                                 <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center shadow-lg animate-pulse-glow">
                                     <i class="ph ph-funnel text-xl"></i>
                                 </div>
-                                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">Review Gateway</span>
+                                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">Sentiment Filter</span>
                             </div>
 
                             <!-- Outcome Bubbles -->
                             <div class="absolute top-6 right-6 glass-panel p-2 shadow-lg border-l-4 border-l-brand-500 group-hover:translate-y-1 transition-transform">
                                 <div class="flex items-center gap-2">
                                     <i class="ph ph-google-logo text-brand-600"></i>
-                                    <div class="flex text-[8px] text-amber-400"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div>
+                                    <div class="flex text-[8px] text-amber-400"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div>
                                 </div>
                                 <span class="text-[8px] font-bold text-slate-400">Public Review</span>
                             </div>
@@ -358,9 +364,9 @@
                             <div class="absolute bottom-6 right-6 glass-panel p-2 shadow-lg border-l-4 border-l-red-400 group-hover:-translate-y-1 transition-transform">
                                 <div class="flex items-center gap-2">
                                     <i class="ph ph-envelope text-red-500"></i>
-                                    <span class="text-[9px] font-bold text-slate-700">Private Feedback</span>
+                                    <span class="text-[9px] font-bold text-slate-700">Support Ticket</span>
                                 </div>
-                                
+                                <span class="text-[8px] font-bold text-slate-400">Private Feedback</span>
                             </div>
                             
                             <!-- Input Bubble -->
@@ -769,11 +775,10 @@
 
         const heroTl = gsap.timeline();
         heroTl.from(".hero-text > *", { y: 30, opacity: 0, duration: 0.8, stagger: 0.15, ease: "power3.out", delay: 0.2 })
-        .from(".floating-element-1", { y: 50, opacity: 0, rotationX: 10, filter: "blur(20px)", duration: 1, ease: "power2.out" }, "-=0.6")
-        .from(".floating-element-2", { x: -40, opacity: 0, filter: "blur(20px)", duration: 1, ease: "back.out(1.2)" }, "-=0.5")
-        .from(".floating-element-3", { x: 40, opacity: 0, filter: "blur(20px)", duration: 1, ease: "back.out(1.2)" }, "-=0.7");
+        .from(".floating-element-2", { y: 30, opacity: 0, filter: "blur(20px)", duration: 1, ease: "power2.out" }, "-=0.6")
+        .from(".floating-element-1", { y: 30, opacity: 0, filter: "blur(20px)", duration: 1, ease: "power2.out" }, "-=0.7")
+        .from(".floating-element-3", { y: 30, opacity: 0, filter: "blur(20px)", duration: 1, ease: "power2.out" }, "-=0.8");
 
-        gsap.to(".floating-element-1", { y: -15, duration: 4, repeat: -1, yoyo: true, ease: "sine.inOut" });
         gsap.to(".robot-head", { rotation: 5, duration: 2, repeat: -1, yoyo: true, ease: "sine.inOut" });
 
         gsap.utils.toArray('.reveal-glass').forEach(elem => {
