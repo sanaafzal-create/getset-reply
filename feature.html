@@ -91,6 +91,36 @@
     clip-path: polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%);
     margin-left: 0;
 }
+
+/* Container transition for smooth shifting */
+.personality-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
+
+/* Hover state logic (complemented by GSAP) */
+.personality-card:hover {
+    transform: translateX(10px);
+}
+
+/* Scanning line effect */
+.animate-scan {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(34, 197, 94, 0.2); /* brand-500/20 */
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+    animation: scan 3s linear infinite;
+}
+
+/* Scan Animation Keyframes */
+@keyframes scan {
+    0% { top: -10%; }
+    100% { top: 110%; }
+}
+
+
     </style>
 </head>
 <body class="antialiased bg-slate-50 text-charcoal selection:bg-brand-200">
@@ -353,7 +383,7 @@
                                 </div>
                                 <div class="flex gap-6">
                                     <div class="text-center">
-                                        <div class="text-[11px] font-bold">0%</div>
+                                        <div class="text-[11px] font-bold">76%</div>
                                         <div class="text-[8px] text-slate-400 uppercase">Open</div>
                                     </div>
                                     <div class="text-center">
@@ -496,7 +526,7 @@
                         </div>
                         <div class="flex justify-between items-center mt-2 px-1">
                             <span class="text-[8px] text-slate-400 font-medium">30 days</span>
-                            <span class="text-[11px] font-bold flex items-center gap-1"><i class="ph ph-trend-up text-brand-500"></i> 4.3 avg</span>
+                            <span class="text-[11px] font-bold flex items-center gap-1"><i class="ph ph-trend-up text-brand-500"></i> 4.6 avg</span>
                         </div>
                     </div>
 
@@ -543,6 +573,137 @@
                         <div class="mt-3 text-[8px] text-slate-300 font-medium flex items-center gap-1">
                             <i class="ph ph-clock"></i> Updated 2 hours ago
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 04. Personalization Section -->
+    <section class="py-24 px-6 bg-slate-50 overflow-hidden" id="personalization-section">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+            
+            <!-- GRAPHIC SIDE (Left) - Interactive Personality Engine -->
+            <div class="relative reveal h-[500px]" id="personality-graphic">
+                
+                <!-- Background Decoration -->
+                <div class="absolute inset-0 bg-brand-200/20 blur-[100px] rounded-full"></div>
+
+                <div class="relative z-10 space-y-3" id="personality-stack">
+                    <!-- Professional Card -->
+                    <div class="personality-card bg-white border border-slate-200 p-5 rounded-2xl shadow-sm flex items-center gap-4 group hover:border-brand-500/50 transition-colors" data-color="border-teal-500">
+                        <div class="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 border border-teal-100">
+                            <i class="ph-fill ph-briefcase text-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="text-lg font-bold">Professional</div>
+                            <div class="text-xs text-slate-500">Polished, authoritative, and direct.</div>
+                        </div>
+                    </div>
+
+                    <!-- Friendly Card -->
+                    <div class="personality-card bg-white border border-slate-200 p-5 rounded-2xl shadow-sm flex items-center gap-4 group hover:border-brand-500/50 transition-colors" data-color="border-yellow-500">
+                        <div class="w-12 h-12 rounded-xl bg-yellow-50 flex items-center justify-center text-yellow-600 border border-yellow-100">
+                            <i class="ph-fill ph-smiley text-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="text-lg font-bold">Friendly</div>
+                            <div class="text-xs text-slate-500">Approachable, warm, and helpful.</div>
+                        </div>
+                    </div>
+
+                    <!-- Heartfelt Card -->
+                    <div class="personality-card bg-white border border-slate-200 p-5 rounded-2xl shadow-sm flex items-center gap-4 group hover:border-brand-500/50 transition-colors" data-color="border-rose-500">
+                        <div class="w-12 h-12 rounded-xl bg-rose-50 flex items-center justify-center text-rose-600 border border-rose-100">
+                            <i class="ph-fill ph-heart text-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="text-lg font-bold">Heartfelt</div>
+                            <div class="text-xs text-slate-500">Empathetic, deep, and sincere.</div>
+                        </div>
+                    </div>
+
+                    <!-- Sarcastic Card -->
+                    <div class="personality-card bg-white border border-slate-200 p-5 rounded-2xl shadow-sm flex items-center gap-4 group hover:border-brand-500/50 transition-colors" data-color="border-orange-500">
+                        <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-orange-600 border border-orange-100">
+                            <i class="ph-fill ph-mask-happy text-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="text-lg font-bold">Sarcastic</div>
+                            <div class="text-xs text-slate-500">Witty, sharp, and humorous.</div>
+                        </div>
+                    </div>
+
+                    <!-- Plus Presets Row -->
+                    <div class="flex items-center justify-between px-2 pt-2 text-[10px] font-bold text-slate-300 uppercase tracking-widest">
+                        <span>+ 3 more presets</span>
+                        <span>Comedian · Southern Hospitality · Gen Z</span>
+                    </div>
+
+                    <!-- Custom AI Clone - Special Card -->
+                    <div class="relative mt-8 group overflow-hidden" id="ai-clone-card">
+                        <div class="absolute inset-0 bg-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="bg-white border-2 border-brand-500/20 p-6 rounded-2xl relative overflow-hidden shadow-lg shadow-brand-500/5">
+                            <!-- Scanning Line Effect -->
+                            <div class="absolute left-0 right-0 h-[2px] bg-brand-500/20 shadow-[0_0_15px_rgba(34,197,94,0.4)] animate-scan z-0"></div>
+                            
+                            <div class="relative z-10">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h4 class="text-xl font-bold italic tracking-tight text-charcoal">Custom AI Clone</h4>
+                                    <div class="px-2 py-1 rounded-md bg-brand-500 text-[10px] font-black uppercase text-white shadow-sm shadow-brand-500/40">Advanced</div>
+                                </div>
+                                <p class="text-sm text-slate-600 leading-relaxed mb-4 font-medium">
+                                    Upload your past 50 responses and we'll mirror your exact tone, humor, and vocabulary perfectly.
+                                </p>
+                                <div class="flex gap-2 items-center">
+                                    <div class="h-1.5 flex-1 bg-slate-100 rounded-full overflow-hidden">
+                                        <div class="h-full bg-brand-500 w-3/4"></div>
+                                    </div>
+                                    <span class="text-[9px] font-bold text-brand-600 uppercase">Training Active</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTENT SIDE (Right) -->
+            <div class="reveal">
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="text-sm font-bold text-brand-600 uppercase tracking-widest">04. Personalization</span>
+                    <div class="h-[1px] w-12 bg-emerald-200"></div>
+                </div>
+                
+                <div class="mb-6">
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-xs font-bold">
+                        <i class="ph ph-magic-wand"></i> AI Personalities
+                    </span>
+                </div>
+
+                <h2 class="text-4xl lg:text-5xl font-bold leading-tight mb-8">
+                    Generic AI feels fake. That's why we built the Personality Engine.
+                </h2>
+                
+                <p class="text-lg text-slate-600 leading-relaxed mb-10">
+                    Generic AI feels fake. Choose from 7 curated presets or train a "Digital Clone" of your own writing style to keep your brand's voice consistent across every single reply.
+                </p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex items-center gap-3 p-4 rounded-2xl bg-white border border-slate-100 shadow-sm">
+                        <i class="ph ph-check-circle text-brand-500 text-xl"></i>
+                        <span class="text-sm font-bold text-slate-700">7 Thematic Presets</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 rounded-2xl bg-white border border-slate-100 shadow-sm">
+                        <i class="ph ph-check-circle text-brand-500 text-xl"></i>
+                        <span class="text-sm font-bold text-slate-700">Custom Prompting</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 rounded-2xl bg-white border border-slate-100 shadow-sm">
+                        <i class="ph ph-check-circle text-brand-500 text-xl"></i>
+                        <span class="text-sm font-bold text-slate-700">Per-Location Defaults</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 rounded-2xl bg-white border border-slate-100 shadow-sm">
+                        <i class="ph ph-check-circle text-brand-500 text-xl"></i>
+                        <span class="text-sm font-bold text-slate-700">AI Clone Training</span>
                     </div>
                 </div>
             </div>
@@ -714,13 +875,136 @@
             ease: "power3.out"
         });
 
+        // 02. OUTREACH SPECIFIC ANIMATION
+        const outreachTimeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#analytics-graphic",
+                start: "top 70%",
+                toggleActions: "play none none none"
+            }
+        });
+
         outreachTimeline.from(".funnel-step", {
-    x: -20,            // Start 20px to the left
-    opacity: 0,        // Fade in
-    duration: 0.6,
-    stagger: 0.1,      // 0.1s delay between each arrow
-    ease: "back.out(1.7)" // Adds a slight "bounce" to the entry
-});
+            x: -20,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "back.out(1.7)"
+        });
+
+        outreachTimeline.from(".campaign-row", {
+            y: 15,
+            opacity: 0,
+            duration: 0.5,
+            stagger: 0.15,
+            ease: "power2.out"
+        }, "-=0.2");
+
+        outreachTimeline.from("#floating-qr", {
+            scale: 0.8,
+            opacity: 0,
+            duration: 0.8,
+            ease: "elastic.out(1, 0.5)"
+        }, "-=0.3");
+
+        // 03. ANALYTICS SPECIFIC ANIMATION
+        const analyticsTimeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#analytics-dashboard-graphic",
+                start: "top 70%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        // 1. Draw bar chart
+        analyticsTimeline.from(".bar-item", {
+            scaleY: 0,
+            transformOrigin: "bottom",
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power4.out"
+        });
+
+        // 2. Draw line chart
+        analyticsTimeline.to(".line-chart-path", {
+            strokeDashoffset: 0,
+            duration: 1.5,
+            ease: "power2.inOut"
+        }, "-=0.5");
+
+        // 3. Slide in competitor list
+        analyticsTimeline.from(".competitor-row", {
+            x: 20,
+            opacity: 0,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: "power2.out"
+        }, "-=1");
+
+        // 4. Reveal AI Insight
+        analyticsTimeline.from("#ai-insight-box", {
+            scale: 0.95,
+            opacity: 0,
+            duration: 0.6,
+            ease: "back.out(1.7)"
+        }, "-=0.5");
+
+        // Continuous pulse for active status
+        gsap.to(".text-brand-600.font-bold", {
+            opacity: 0.6,
+            duration: 1.5,
+            repeat: -1,
+            yoyo: true,
+            ease: "power1.inOut"
+        });
+
+         // 04. PERSONALIZATION SPECIFIC ANIMATION
+        const personalityTimeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#personality-graphic",
+                start: "top 70%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        personalityTimeline.from(".personality-card", {
+            x: -50,
+            opacity: 0,
+            stagger: 0.1,
+            duration: 0.8,
+            ease: "power3.out"
+        });
+
+        personalityTimeline.from("#ai-clone-card", {
+            y: 40,
+            opacity: 0,
+            duration: 1,
+            ease: "power4.out"
+        }, "-=0.4");
+
+        // Interactive "Shifting" Cards
+        const cards = document.querySelectorAll('.personality-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                gsap.to(card, { x: 20, scale: 1.02, backgroundColor: 'rgba(255,255,255,0.8)', duration: 0.3 });
+                // Dim others
+                cards.forEach(other => {
+                    if (other !== card) gsap.to(other, { opacity: 0.4, x: -10, duration: 0.3 });
+                });
+            });
+            card.addEventListener('mouseleave', () => {
+                gsap.to(cards, { x: 0, scale: 1, backgroundColor: 'white', opacity: 1, duration: 0.3 });
+            });
+        });
+
+        // Continuous pulse for active status
+        gsap.to(".text-brand-600.font-bold", {
+            opacity: 0.6,
+            duration: 1.5,
+            repeat: -1,
+            yoyo: true,
+            ease: "power1.inOut"
+        });
     </script>
 </body>
 </html>
