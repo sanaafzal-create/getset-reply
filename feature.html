@@ -120,6 +120,46 @@
     100% { top: 110%; }
 }
 
+/* Styling for the interactive personality cards */
+.personality-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
+
+/* Glassmorphism effect for the AI Response Mockup panel */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 24px;
+}
+
+/* Gradient effect for the "Personality Engine" text highlight */
+.text-gradient {
+    background: linear-gradient(135deg, #061614 0%, #22C55E 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Custom scrollbar for the AI response text area */
+.response-box::-webkit-scrollbar { 
+    width: 4px; 
+}
+.response-box::-webkit-scrollbar-track { 
+    background: transparent; 
+}
+.response-box::-webkit-scrollbar-thumb { 
+    background: #e2e8f0; 
+    border-radius: 10px; 
+}
+
+/* Background blob decoration behind the graphic */
+.bg-mesh { 
+    background-color: #DCFCE7; 
+    filter: blur(100px); 
+    opacity: 0.4; 
+}
+
 
     </style>
 </head>
@@ -580,88 +620,95 @@
     </section>
 
     <!-- 04. Personalization Section -->
-    <section class="py-24 px-6 bg-slate-50 overflow-hidden" id="personalization-section">
+    <section class="py-32 px-6 bg-slate-50 overflow-hidden" id="personalization-section">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
             
-            <!-- GRAPHIC SIDE (Left) - Interactive Personality Engine -->
-            <div class="relative reveal h-[500px]" id="personality-graphic">
-                
-                <!-- Background Decoration -->
+            <!-- GRAPHIC SIDE (Left) - Personality Engine -->
+            <div class="relative reveal" id="personality-graphic">
                 <div class="absolute inset-0 bg-brand-200/20 blur-[100px] rounded-full"></div>
 
-                <div class="relative z-10 space-y-3" id="personality-stack">
-                    <!-- Professional Card -->
-                    <div class="personality-card bg-white border border-slate-200 p-5 rounded-2xl shadow-sm flex items-center gap-4 group hover:border-brand-500/50 transition-colors" data-color="border-teal-500">
-                        <div class="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 border border-teal-100">
-                            <i class="ph-fill ph-briefcase text-2xl"></i>
-                        </div>
-                        <div>
-                            <div class="text-lg font-bold">Professional</div>
-                            <div class="text-xs text-slate-500">Polished, authoritative, and direct.</div>
-                        </div>
-                    </div>
-
-                    <!-- Friendly Card -->
-                    <div class="personality-card bg-white border border-slate-200 p-5 rounded-2xl shadow-sm flex items-center gap-4 group hover:border-brand-500/50 transition-colors" data-color="border-yellow-500">
-                        <div class="w-12 h-12 rounded-xl bg-yellow-50 flex items-center justify-center text-yellow-600 border border-yellow-100">
-                            <i class="ph-fill ph-smiley text-2xl"></i>
-                        </div>
-                        <div>
-                            <div class="text-lg font-bold">Friendly</div>
-                            <div class="text-xs text-slate-500">Approachable, warm, and helpful.</div>
-                        </div>
-                    </div>
-
-                    <!-- Heartfelt Card -->
-                    <div class="personality-card bg-white border border-slate-200 p-5 rounded-2xl shadow-sm flex items-center gap-4 group hover:border-brand-500/50 transition-colors" data-color="border-rose-500">
-                        <div class="w-12 h-12 rounded-xl bg-rose-50 flex items-center justify-center text-rose-600 border border-rose-100">
-                            <i class="ph-fill ph-heart text-2xl"></i>
-                        </div>
-                        <div>
-                            <div class="text-lg font-bold">Heartfelt</div>
-                            <div class="text-xs text-slate-500">Empathetic, deep, and sincere.</div>
-                        </div>
-                    </div>
-
-                    <!-- Sarcastic Card -->
-                    <div class="personality-card bg-white border border-slate-200 p-5 rounded-2xl shadow-sm flex items-center gap-4 group hover:border-brand-500/50 transition-colors" data-color="border-orange-500">
-                        <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-orange-600 border border-orange-100">
-                            <i class="ph-fill ph-mask-happy text-2xl"></i>
-                        </div>
-                        <div>
-                            <div class="text-lg font-bold">Sarcastic</div>
-                            <div class="text-xs text-slate-500">Witty, sharp, and humorous.</div>
-                        </div>
-                    </div>
-
-                    <!-- Plus Presets Row -->
-                    <div class="flex items-center justify-between px-2 pt-2 text-[10px] font-bold text-slate-300 uppercase tracking-widest">
-                        <span>+ 3 more presets</span>
-                        <span>Comedian · Southern Hospitality · Gen Z</span>
-                    </div>
-
-                    <!-- Custom AI Clone - Special Card -->
-                    <div class="relative mt-8 group overflow-hidden" id="ai-clone-card">
-                        <div class="absolute inset-0 bg-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <div class="bg-white border-2 border-brand-500/20 p-6 rounded-2xl relative overflow-hidden shadow-lg shadow-brand-500/5">
-                            <!-- Scanning Line Effect -->
-                            <div class="absolute left-0 right-0 h-[2px] bg-brand-500/20 shadow-[0_0_15px_rgba(34,197,94,0.4)] animate-scan z-0"></div>
-                            
-                            <div class="relative z-10">
-                                <div class="flex items-center justify-between mb-4">
-                                    <h4 class="text-xl font-bold italic tracking-tight text-charcoal">Custom AI Clone</h4>
-                                    <div class="px-2 py-1 rounded-md bg-brand-500 text-[10px] font-black uppercase text-white shadow-sm shadow-brand-500/40">Advanced</div>
-                                </div>
-                                <p class="text-sm text-slate-600 leading-relaxed mb-4 font-medium">
-                                    Upload your past 50 responses and we'll mirror your exact tone, humor, and vocabulary perfectly.
-                                </p>
-                                <div class="flex gap-2 items-center">
-                                    <div class="h-1.5 flex-1 bg-slate-100 rounded-full overflow-hidden">
-                                        <div class="h-full bg-brand-500 w-3/4"></div>
-                                    </div>
-                                    <span class="text-[9px] font-bold text-brand-600 uppercase">Training Active</span>
-                                </div>
+                <div class="relative z-10 flex flex-col lg:flex-row gap-8 items-start">
+                    <!-- The Cards List -->
+                    <div class="w-full lg:w-1/2 space-y-3" id="personality-stack">
+                        <div class="personality-card active bg-white border-2 border-brand-500 p-4 rounded-2xl shadow-sm flex items-center gap-3 transition-all" data-personality="professional">
+                            <div class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 border border-teal-100">
+                                <i class="ph-fill ph-briefcase text-xl"></i>
                             </div>
+                            <div>
+                                <div class="text-sm font-bold">Professional</div>
+                                <div class="text-[10px] text-slate-500">Polished and direct.</div>
+                            </div>
+                        </div>
+
+                        <div class="personality-card bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex items-center gap-3 transition-all" data-personality="friendly">
+                            <div class="w-10 h-10 rounded-xl bg-yellow-50 flex items-center justify-center text-yellow-600 border border-yellow-100">
+                                <i class="ph-fill ph-smiley text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm font-bold">Friendly</div>
+                                <div class="text-[10px] text-slate-500">Warm and helpful.</div>
+                            </div>
+                        </div>
+
+                        <div class="personality-card bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex items-center gap-3 transition-all" data-personality="heartfelt">
+                            <div class="w-10 h-10 rounded-xl bg-rose-50 flex items-center justify-center text-rose-600 border border-rose-100">
+                                <i class="ph-fill ph-heart text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm font-bold">Heartfelt</div>
+                                <div class="text-[10px] text-slate-500">Deeply empathetic.</div>
+                            </div>
+                        </div>
+
+                        <div class="personality-card bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex items-center gap-3 transition-all" data-personality="sarcastic">
+                            <div class="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center text-orange-600 border border-orange-100">
+                                <i class="ph-fill ph-mask-happy text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm font-bold">Sarcastic</div>
+                                <div class="text-[10px] text-slate-500">Witty and sharp.</div>
+                            </div>
+                        </div>
+
+                        <div class="personality-card bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex items-center gap-3 transition-all" data-personality="recovery">
+                            <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 border border-indigo-100">
+                                <i class="ph-fill ph-shield-check text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm font-bold text-indigo-900">Calm Recovery</div>
+                                <div class="text-[10px] text-slate-500">De-escalation master.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- The AI Response Mockup -->
+                    <div class="w-full lg:w-1/2 glass-panel p-6 shadow-xl border-white bg-white/90 relative overflow-hidden h-[480px] flex flex-col">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-brand-500" id="response-accent"></div>
+                        
+                        <!-- Reviewer Info -->
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-10 h-10 bg-slate-200 rounded-full flex items-center justify-center text-slate-400 font-bold">J</div>
+                            <div>
+                                <div class="text-xs font-bold">James Miller <span class="text-[10px] font-normal text-slate-400">· 1 star</span></div>
+                                <div class="flex text-amber-400 text-[10px]"><i class="ph-fill ph-star"></i><i class="ph ph-star"></i><i class="ph ph-star"></i><i class="ph ph-star"></i><i class="ph ph-star"></i></div>
+                            </div>
+                        </div>
+
+                        <p class="text-xs italic text-slate-500 mb-6 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                            "Ordered for a birthday and it arrived 3 days late. Ruined the surprise. Never buying here again."
+                        </p>
+
+                        <div class="flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-[10px] font-black uppercase text-brand-600 tracking-tighter">AI Response Draft</span>
+                                <span class="px-2 py-0.5 rounded-full bg-slate-100 text-[9px] font-bold" id="active-label">Professional</span>
+                            </div>
+                            <div class="flex-1 bg-white border border-slate-100 rounded-xl p-4 text-[11px] leading-relaxed text-slate-700 shadow-inner response-box overflow-y-auto" id="response-content">
+                                Thank you for your feedback, James. We sincerely apologize for the delay in your shipment. This does not meet our standard of service. We have processed a full refund for your shipping costs and would like to discuss this further to make it right.
+                            </div>
+                            <button class="mt-4 w-full bg-charcoal text-white py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 group">
+                                Approve & Send <i class="ph ph-paper-plane-right group-hover:translate-x-1 transition-transform"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -674,32 +721,18 @@
                     <div class="h-[1px] w-12 bg-emerald-200"></div>
                 </div>
                 
-                <div class="mb-6">
-                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-xs font-bold">
-                        <i class="ph ph-magic-wand"></i> AI Personalities
-                    </span>
-                </div>
-
                 <h2 class="text-4xl lg:text-5xl font-bold leading-tight mb-8">
-                    Generic AI feels fake. That's why we built the Personality Engine.
+                    Generic AI feels fake. That's why we built the <span class="text-gradient">Personality Engine.</span>
                 </h2>
                 
                 <p class="text-lg text-slate-600 leading-relaxed mb-10">
-                    Generic AI feels fake. Choose from 7 curated presets or train a "Digital Clone" of your own writing style to keep your brand's voice consistent across every single reply.
+                    Switch between 7 curated presets or use our new <b>Calm Service Recovery</b> mode to handle unhappy customers with grace. Our AI identifies tension and suggests the perfect de-escalation tone automatically.
                 </p>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="flex items-center gap-3 p-4 rounded-2xl bg-white border border-slate-100 shadow-sm">
                         <i class="ph ph-check-circle text-brand-500 text-xl"></i>
-                        <span class="text-sm font-bold text-slate-700">7 Thematic Presets</span>
-                    </div>
-                    <div class="flex items-center gap-3 p-4 rounded-2xl bg-white border border-slate-100 shadow-sm">
-                        <i class="ph ph-check-circle text-brand-500 text-xl"></i>
-                        <span class="text-sm font-bold text-slate-700">Custom Prompting</span>
-                    </div>
-                    <div class="flex items-center gap-3 p-4 rounded-2xl bg-white border border-slate-100 shadow-sm">
-                        <i class="ph ph-check-circle text-brand-500 text-xl"></i>
-                        <span class="text-sm font-bold text-slate-700">Per-Location Defaults</span>
+                        <span class="text-sm font-bold text-slate-700">De-escalation Mode</span>
                     </div>
                     <div class="flex items-center gap-3 p-4 rounded-2xl bg-white border border-slate-100 shadow-sm">
                         <i class="ph ph-check-circle text-brand-500 text-xl"></i>
@@ -956,6 +989,75 @@
             repeat: -1,
             yoyo: true,
             ease: "power1.inOut"
+        });
+
+        // PERSONALITY PREVIEW LOGIC
+        const responseData = {
+            professional: {
+                label: "Professional",
+                color: "#22C55E",
+                text: "Thank you for bringing this to our attention, James. We sincerely apologize for the delay in your shipment. This does not meet our standard of service. We have already initiated a full refund for your shipping costs and would like to discuss this further to ensure we resolve this to your satisfaction."
+            },
+            friendly: {
+                label: "Friendly",
+                color: "#EAB308",
+                text: "Hi James! We're so sorry your birthday surprise didn't arrive on time—that's definitely not the experience we wanted for you. 😔 We've refunded your shipping fees as a first step. Please check your inbox for a special discount code for your next order, and let us know how we can make it right!"
+            },
+            heartfelt: {
+                label: "Heartfelt",
+                color: "#F43F5E",
+                text: "James, we are truly heartbroken to hear we let you down on such a special occasion. We understand how important those birthday moments are, and we feel terrible about the delay. We've refunded your shipping costs, but we know that doesn't fix the surprise. We'd love to send a small gift to make up for this if you're open to it."
+            },
+            sarcastic: {
+                label: "Sarcastic",
+                color: "#F97316",
+                text: "Ouch. A late birthday gift is basically the eighth deadly sin, isn't it? We've fired the delivery drones responsible (not really, but they're in time-out). Your shipping fees have been refunded, because paying for a late package is just adding insult to injury. Hope the recipient forgives us eventually!"
+            },
+            recovery: {
+                label: "Calm Recovery",
+                color: "#6366F1",
+                text: "James, I completely understand your frustration—a late delivery for a special occasion is unacceptable. Your shipping has been fully refunded, and I've personally verified that our logistics team is investigating why the delay occurred to prevent this happening again. How can we best compensate you for the inconvenience caused today?"
+            }
+        };
+
+        const personalityCards = document.querySelectorAll('.personality-card');
+        const responseContent = document.getElementById('response-content');
+        const responseLabel = document.getElementById('active-label');
+        const responseAccent = document.getElementById('response-accent');
+
+        personalityCards.forEach(card => {
+            const selectPersonality = () => {
+                const type = card.getAttribute('data-personality');
+                const data = responseData[type];
+
+                // Update UI
+                personalityCards.forEach(c => {
+                    c.classList.remove('active', 'border-brand-500');
+                    c.classList.add('border-slate-200');
+                    c.style.borderColor = '';
+                });
+                card.classList.add('active');
+                card.classList.remove('border-slate-200');
+                card.style.borderColor = data.color;
+
+                // Animate Text Change
+                gsap.to(responseContent, {
+                    opacity: 0, y: 5, duration: 0.1, onComplete: () => {
+                        responseContent.innerText = data.text;
+                        responseLabel.innerText = data.label;
+                        responseAccent.style.backgroundColor = data.color;
+                        gsap.to(responseContent, { opacity: 1, y: 0, duration: 0.3 });
+                    }
+                });
+            };
+
+            card.addEventListener('mouseenter', selectPersonality);
+            card.addEventListener('click', selectPersonality);
+        });
+
+        // Entrance animation
+        gsap.from("header > div > *", {
+            opacity: 0, y: 20, stagger: 0.1, duration: 1, ease: "power3.out"
         });
 
          // 04. PERSONALIZATION SPECIFIC ANIMATION
