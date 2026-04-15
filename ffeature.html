@@ -79,88 +79,46 @@
         }
 
         .funnel-step {
-    /* Creates the arrow shape */
-    clip-path: polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%, 15% 50%);
-    
-    /* Pulls the step 12px to the left to overlap the previous arrow's point */
-    margin-left: -12px;
-}
+            clip-path: polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%, 15% 50%);
+            margin-left: -12px;
+        }
 
-/* The first step shouldn't have an indent on the left side */
-.funnel-step:first-child {
-    clip-path: polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%);
-    margin-left: 0;
-}
+        .funnel-step:first-child {
+            clip-path: polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%);
+            margin-left: 0;
+        }
 
-/* Container transition for smooth shifting */
-.personality-card {
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    cursor: pointer;
-}
+        .personality-card {
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            transform: none !important; /* Force no movement */
+        }
 
-/* Hover state logic (complemented by GSAP) */
-.personality-card:hover {
-    transform: translateX(10px);
-}
+        .animate-scan {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(34, 197, 94, 0.2); 
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+            animation: scan 3s linear infinite;
+        }
 
-/* Scanning line effect */
-.animate-scan {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: rgba(34, 197, 94, 0.2); /* brand-500/20 */
-    box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
-    animation: scan 3s linear infinite;
-}
+        @keyframes scan {
+            0% { top: -10%; }
+            100% { top: 110%; }
+        }
 
-/* Scan Animation Keyframes */
-@keyframes scan {
-    0% { top: -10%; }
-    100% { top: 110%; }
-}
-
-/* Styling for the interactive personality cards */
-.personality-card {
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    cursor: pointer;
-}
-
-/* Glassmorphism effect for the AI Response Mockup panel */
-.glass-panel {
-    background: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    border-radius: 24px;
-}
-
-/* Gradient effect for the "Personality Engine" text highlight */
-.text-gradient {
-    background: linear-gradient(135deg, #061614 0%, #22C55E 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* Custom scrollbar for the AI response text area */
-.response-box::-webkit-scrollbar { 
-    width: 4px; 
-}
-.response-box::-webkit-scrollbar-track { 
-    background: transparent; 
-}
-.response-box::-webkit-scrollbar-thumb { 
-    background: #e2e8f0; 
-    border-radius: 10px; 
-}
-
-/* Background blob decoration behind the graphic */
-.bg-mesh { 
-    background-color: #DCFCE7; 
-    filter: blur(100px); 
-    opacity: 0.4; 
-}
-
-
+        .response-box::-webkit-scrollbar { 
+            width: 4px; 
+        }
+        .response-box::-webkit-scrollbar-track { 
+            background: transparent; 
+        }
+        .response-box::-webkit-scrollbar-thumb { 
+            background: #e2e8f0; 
+            border-radius: 10px; 
+        }
     </style>
 </head>
 <body class="antialiased bg-slate-50 text-charcoal selection:bg-brand-200">
@@ -180,7 +138,7 @@
             </div>
             <div class="hidden md:flex items-center gap-10 text-sm font-medium text-slate-600">
                 <a href="index.html" class="hover:text-brand-600 transition-colors">Home</a>
-                <a href="feature.html" class="text-brand-600 relative after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-brand-500">Features</a>
+                <a href="ffeature.html" class="text-brand-600 relative after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-brand-500">Features</a>
                 <a href="pricing.html" class="hover:text-brand-600 transition-colors">Pricing</a>
             </div>
             <button class="bg-charcoal text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-brand-700 transition-all">
@@ -190,15 +148,18 @@
     </nav>
 
     <!-- Features Hero -->
-    <header class="pt-40 pb-20 px-6 text-center">
+    <header class="pt-40 pb-20 px-6 text-center opacity-100 bg-transparent relative z-10">
         <div class="max-w-3xl mx-auto">
             <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-50 border border-brand-100 mb-6">
                 <span class="text-xs font-bold text-brand-700 uppercase tracking-widest">Platform Capabilities</span>
             </div>
-            <h1 class="text-5xl lg:text-6xl font-bold tracking-tight mb-6">Everything you need to manage<span class="text-gradient"> your reputation</span></h1>
-            <p class="text-lg text-slate-600 leading-relaxed mb-10">From AI-powered responses to review deflection, outreach campaigns, and deep analytics — GetSetReply is the all-in-one platform that turns reviews into growth.</p>
+            <h1 class="text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-charcoal">
+                Everything you need to manage<span class="text-gradient"> your reputation</span>
+            </h1>
+            <p class="text-lg text-slate-600 leading-relaxed mb-10 opacity-100">
+                From AI-powered responses to review deflection, outreach campaigns, and deep analytics — GetSetReply is the all-in-one platform that turns reviews into growth.
+            </p>
             
-            <!-- Hero Buttons -->
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <button class="w-full sm:w-auto bg-charcoal text-white px-8 py-4 rounded-full font-bold hover:bg-brand-700 transition-all shadow-lg hover:shadow-brand-500/20">
                     Explore All Features
@@ -248,13 +209,10 @@
 
             <!-- Graphic Side -->
             <div class="relative reveal">
-                <!-- Main Graphic Container -->
                 <div class="glass-panel p-8 md:p-12 relative z-10 shadow-2xl border-white/40">
                     <div class="text-center mb-12">
                         <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-4">Step 1</span>
                         <h3 class="text-xl font-bold">How was your experience?</h3>
-                        
-                        <!-- Reaction Selection -->
                         <div class="flex justify-center gap-4 mt-6">
                             <div class="w-20 h-24 bg-white border-2 border-brand-500 rounded-2xl flex flex-col items-center justify-center gap-2 shadow-lg shadow-brand-500/10 transition-transform hover:scale-105 cursor-default">
                                 <i class="ph ph-smiley text-3xl text-brand-600"></i>
@@ -272,15 +230,12 @@
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-8 relative">
-                        <!-- Connecting Lines (Decorative SVG) -->
                         <div class="absolute top-[-30px] left-1/2 -translate-x-1/2 w-full hidden md:block pointer-events-none">
                             <svg viewBox="0 0 400 60" fill="none" class="w-full h-auto">
                                 <path d="M200 0V20C200 40 100 40 100 60" stroke="#22C55E" stroke-width="2" class="flow-line opacity-30" />
                                 <path d="M200 0V20C200 40 300 40 300 60" stroke="#F43F5E" stroke-width="2" class="flow-line opacity-30" />
                             </svg>
                         </div>
-
-                        <!-- Step 2A: Positive Path -->
                         <div class="space-y-4">
                             <div class="flex items-center gap-2 justify-center md:justify-start mb-2">
                                 <span class="text-[10px] font-bold text-brand-600 uppercase">Step 2A</span>
@@ -291,8 +246,8 @@
                             <div class="space-y-3">
                                 <div class="bg-white/80 p-3 rounded-xl border border-slate-100 flex items-center justify-between group cursor-pointer hover:border-brand-200 hover:shadow-sm transition-all">
                                     <div class="flex items-center gap-3">
-                                        <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
-                                            <i class="ph-fill ph-google-logo text-blue-500"></i>
+                                        <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-500">
+                                            <i class="ph-fill ph-google-logo"></i>
                                         </div>
                                         <span class="text-xs font-semibold">Google</span>
                                     </div>
@@ -300,8 +255,8 @@
                                 </div>
                                 <div class="bg-white/80 p-3 rounded-xl border border-slate-100 flex items-center justify-between group cursor-pointer hover:border-brand-200 hover:shadow-sm transition-all">
                                     <div class="flex items-center gap-3">
-                                        <div class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center">
-                                            <i class="ph-fill ph-yelp-logo text-red-500"></i>
+                                        <div class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-red-500">
+                                            <i class="ph-fill ph-yelp-logo"></i>
                                         </div>
                                         <span class="text-xs font-semibold">Yelp</span>
                                     </div>
@@ -309,8 +264,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Step 2B: Negative Path -->
                         <div class="space-y-4">
                             <div class="flex items-center gap-2 justify-center md:justify-start mb-2">
                                 <span class="text-[10px] font-bold text-rose-600 uppercase">Step 2B</span>
@@ -331,25 +284,16 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Background Glows -->
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-brand-200 blur-[100px] opacity-20 -z-10"></div>
             </div>
         </div>
     </section>
 
-     <!-- 01. Growth Outreach Section -->
+    <!-- 02. Growth Outreach Section -->
     <section class="py-24 px-6 overflow-hidden">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
-             <!-- Graphic Side -->
-           
-            
-
-             <!-- GRAPHIC SIDE (Left) - Inspired by Uploaded Dashboard -->
             <div class="lg:order-1 relative reveal" id="analytics-graphic">
                 <div class="glass-panel p-6 shadow-2xl relative bg-white/80 overflow-hidden">
-                    
-                    <!-- Header -->
                     <div class="flex items-center justify-between mb-8">
                         <h3 class="text-sm font-bold text-slate-800">Outreach Analytics</h3>
                         <div class="flex gap-2">
@@ -357,8 +301,6 @@
                             <span class="w-2 h-2 rounded-full bg-blue-400"></span>
                         </div>
                     </div>
-
-                    <!-- Performance Funnel -->
                     <div class="mb-10">
                         <div class="text-[10px] font-bold text-slate-400 uppercase mb-3 px-1">Performance Funnel</div>
                         <div class="flex items-stretch h-16 w-full" id="funnel-container">
@@ -380,15 +322,12 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Top Performing Campaigns List -->
                     <div>
                         <div class="flex justify-between items-center mb-4 px-1">
                             <div class="text-[10px] font-bold text-slate-400 uppercase">Top Performing Campaigns</div>
                             <div class="text-[10px] font-bold text-brand-600 cursor-pointer">View All</div>
                         </div>
                         <div class="space-y-2" id="campaign-list">
-                            <!-- Campaign Row 1 -->
                             <div class="bg-slate-50 border border-slate-100 rounded-xl p-3 flex items-center justify-between campaign-row">
                                 <div class="flex items-center gap-3">
                                     <div class="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-brand-600 shadow-sm">
@@ -410,7 +349,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Campaign Row 2 -->
                             <div class="bg-slate-50 border border-slate-100 rounded-xl p-3 flex items-center justify-between campaign-row">
                                 <div class="flex items-center gap-3">
                                     <div class="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-blue-500 shadow-sm">
@@ -435,8 +373,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Floating QR Component -->
                 <div class="absolute -bottom-6 -right-6 glass-panel p-4 shadow-xl border-brand-200 bg-brand-50/90 animate-float" id="floating-qr">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-charcoal rounded-lg flex items-center justify-center">
@@ -449,8 +385,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Content Side -->
             <div class="reveal">
                 <div class="flex items-center gap-2 mb-6">
                     <span class="text-sm font-bold text-brand-600 uppercase tracking-widest">02. Outreach</span>
@@ -465,7 +399,6 @@
                 <p class="text-lg text-slate-600 leading-relaxed mb-10">
                     Don't wait for reviews to trickle in. Launch email and SMS campaigns that drive customers to your review page — using the same gating experience to deflect negative reviews before they go public. Manage contacts, customize templates, generate QR codes for in-store prompts, and track every interaction.
                 </p>
-                
                 <div class="flex flex-wrap gap-6">
                     <div class="flex items-center gap-2 text-sm font-medium text-slate-700">
                         <i class="ph ph-terminal-window text-brand-500 text-lg"></i>
@@ -485,15 +418,12 @@
                     </div>
                 </div>
             </div>
-
-           
         </div>
     </section>
 
     <!-- 03. Analytics Section -->
     <section class="py-24 px-6 overflow-hidden" id="analytics-section">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
-            <!-- CONTENT SIDE (Left) -->
             <div class="reveal">
                 <div class="flex items-center gap-2 mb-6">
                     <span class="text-sm font-bold text-brand-600 uppercase tracking-widest">03. Analytics</span>
@@ -502,17 +432,12 @@
                         <i class="ph-fill ph-shield-check mr-1"></i> Analytics & Insights
                     </span>
                 </div>
-                
-                
-
                 <h2 class="text-4xl lg:text-5xl font-bold leading-tight mb-8">
                     Understand your reviews, not just respond to them
                 </h2>
-                
                 <p class="text-lg text-slate-600 leading-relaxed mb-10">
                     Go beyond star ratings. Track sentiment trends, benchmark against local competitors, surface recurring themes with AI, and forecast your reputation trajectory — all from a single dashboard.
                 </p>
-                
                 <div class="flex flex-wrap gap-3">
                     <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100/50 border border-slate-200 text-sm font-medium text-slate-700">
                         <i class="ph ph-chat-circle text-brand-500"></i> Sentiment analysis
@@ -529,11 +454,8 @@
                 </div>
             </div>
 
-            <!-- GRAPHIC SIDE (Right) -->
             <div class="relative reveal" id="analytics-dashboard-graphic">
                 <div class="glass-panel p-6 shadow-2xl bg-white/80 grid grid-cols-2 gap-4">
-                    
-                    <!-- Card 1: Reviews by Month -->
                     <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm h-48">
                         <div class="text-[10px] font-bold text-slate-400 uppercase mb-4">Reviews by Month</div>
                         <div class="flex items-end justify-between h-24 gap-1 px-1" id="bar-chart">
@@ -548,8 +470,6 @@
                             <span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span>
                         </div>
                     </div>
-
-                    <!-- Card 2: Rating Trend -->
                     <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm h-48 relative">
                         <div class="text-[10px] font-bold text-slate-400 uppercase mb-4">Rating Trend</div>
                         <div class="h-24 w-full relative">
@@ -569,8 +489,6 @@
                             <span class="text-[11px] font-bold flex items-center gap-1"><i class="ph ph-trend-up text-brand-500"></i> 4.6 avg</span>
                         </div>
                     </div>
-
-                    <!-- Card 3: Competitor Ranking -->
                     <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm h-56">
                         <div class="text-[10px] font-bold text-slate-400 uppercase mb-4">Competitor Ranking</div>
                         <div class="space-y-3" id="competitor-list">
@@ -597,8 +515,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Card 4: AI Insight -->
                     <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm h-56 flex flex-col">
                         <div class="text-[10px] font-bold text-slate-400 uppercase mb-4">AI Insight</div>
                         <div class="flex-1 bg-brand-50/50 rounded-xl border border-brand-100/50 p-3" id="ai-insight-box">
@@ -622,15 +538,11 @@
     <!-- 04. Personalization Section -->
     <section class="py-32 px-6 bg-slate-50 overflow-hidden" id="personalization-section">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
-            
-            <!-- GRAPHIC SIDE (Left) - Personality Engine -->
             <div class="relative reveal" id="personality-graphic">
                 <div class="absolute inset-0 bg-brand-200/20 blur-[100px] rounded-full"></div>
-
                 <div class="relative z-10 flex flex-col lg:flex-row gap-8 items-start">
-                    <!-- The Cards List -->
                     <div class="w-full lg:w-1/2 space-y-3" id="personality-stack">
-                        <div class="personality-card active bg-white border-2 border-brand-500 p-4 rounded-2xl shadow-sm flex items-center gap-3 transition-all" data-personality="professional">
+                        <div class="personality-card active bg-white border-2 border-brand-500 p-4 rounded-2xl shadow-sm flex items-center gap-3" data-personality="professional">
                             <div class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 border border-teal-100">
                                 <i class="ph-fill ph-briefcase text-xl"></i>
                             </div>
@@ -639,8 +551,7 @@
                                 <div class="text-[10px] text-slate-500">Polished and direct.</div>
                             </div>
                         </div>
-
-                        <div class="personality-card bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex items-center gap-3 transition-all" data-personality="friendly">
+                        <div class="personality-card bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex items-center gap-3" data-personality="friendly">
                             <div class="w-10 h-10 rounded-xl bg-yellow-50 flex items-center justify-center text-yellow-600 border border-yellow-100">
                                 <i class="ph-fill ph-smiley text-xl"></i>
                             </div>
@@ -649,8 +560,7 @@
                                 <div class="text-[10px] text-slate-500">Warm and helpful.</div>
                             </div>
                         </div>
-
-                        <div class="personality-card bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex items-center gap-3 transition-all" data-personality="heartfelt">
+                        <div class="personality-card bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex items-center gap-3" data-personality="heartfelt">
                             <div class="w-10 h-10 rounded-xl bg-rose-50 flex items-center justify-center text-rose-600 border border-rose-100">
                                 <i class="ph-fill ph-heart text-xl"></i>
                             </div>
@@ -659,8 +569,7 @@
                                 <div class="text-[10px] text-slate-500">Deeply empathetic.</div>
                             </div>
                         </div>
-
-                        <div class="personality-card bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex items-center gap-3 transition-all" data-personality="sarcastic">
+                        <div class="personality-card bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex items-center gap-3" data-personality="sarcastic">
                             <div class="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center text-orange-600 border border-orange-100">
                                 <i class="ph-fill ph-mask-happy text-xl"></i>
                             </div>
@@ -669,8 +578,7 @@
                                 <div class="text-[10px] text-slate-500">Witty and sharp.</div>
                             </div>
                         </div>
-
-                        <div class="personality-card bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex items-center gap-3 transition-all" data-personality="recovery">
+                        <div class="personality-card bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex items-center gap-3" data-personality="recovery">
                             <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 border border-indigo-100">
                                 <i class="ph-fill ph-shield-check text-xl"></i>
                             </div>
@@ -680,12 +588,8 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- The AI Response Mockup -->
                     <div class="w-full lg:w-1/2 glass-panel p-6 shadow-xl border-white bg-white/90 relative overflow-hidden h-[480px] flex flex-col">
                         <div class="absolute top-0 left-0 w-full h-1 bg-brand-500" id="response-accent"></div>
-                        
-                        <!-- Reviewer Info -->
                         <div class="flex items-center gap-3 mb-6">
                             <div class="w-10 h-10 bg-slate-200 rounded-full flex items-center justify-center text-slate-400 font-bold">J</div>
                             <div>
@@ -693,11 +597,9 @@
                                 <div class="flex text-amber-400 text-[10px]"><i class="ph-fill ph-star"></i><i class="ph ph-star"></i><i class="ph ph-star"></i><i class="ph ph-star"></i><i class="ph ph-star"></i></div>
                             </div>
                         </div>
-
                         <p class="text-xs italic text-slate-500 mb-6 bg-slate-50 p-3 rounded-lg border border-slate-100">
                             "Ordered for a birthday and it arrived 3 days late. Ruined the surprise. Never buying here again."
                         </p>
-
                         <div class="flex-1 flex flex-col">
                             <div class="flex items-center justify-between mb-3">
                                 <span class="text-[10px] font-black uppercase text-brand-600 tracking-tighter">AI Response Draft</span>
@@ -714,21 +616,17 @@
                 </div>
             </div>
 
-            <!-- CONTENT SIDE (Right) -->
             <div class="reveal">
                 <div class="flex items-center gap-2 mb-6">
                     <span class="text-sm font-bold text-brand-600 uppercase tracking-widest">04. Personalization</span>
                     <div class="h-[1px] w-12 bg-emerald-200"></div>
                 </div>
-                
                 <h2 class="text-4xl lg:text-5xl font-bold leading-tight mb-8">
                     Generic AI feels fake. That's why we built the <span class="text-gradient">Personality Engine.</span>
                 </h2>
-                
                 <p class="text-lg text-slate-600 leading-relaxed mb-10">
                     Switch between 7 curated presets or use our new <b>Calm Service Recovery</b> mode to handle unhappy customers with grace. Our AI identifies tension and suggests the perfect de-escalation tone automatically.
                 </p>
-                
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="flex items-center gap-3 p-4 rounded-2xl bg-white border border-slate-100 shadow-sm">
                         <i class="ph ph-check-circle text-brand-500 text-xl"></i>
@@ -743,14 +641,9 @@
         </div>
     </section>
 
-    
-
-
     <!-- Detailed Features List -->
     <section class="py-20 px-6">
         <div class="max-w-7xl mx-auto space-y-32">
-            
-            <!-- Feature 1: AI Agent Intelligence -->
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="reveal">
                     <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
@@ -794,7 +687,6 @@
                 </div>
             </div>
 
-            <!-- Feature 2: Omni-Channel Monitoring -->
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="lg:order-2 reveal">
                     <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
@@ -823,29 +715,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Feature 3: Smart Routing Replaced/Moved -->
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div class="reveal">
-                    <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
-                        <i class="ph-fill ph-presentation-chart text-brand-500"></i>
-                        Advanced Analytics & Insights
-                    </h2>
-                    <p class="text-slate-600 mb-8 leading-relaxed">Go beyond star ratings. Track sentiment trends, benchmark against local competitors, surface recurring themes with AI, and forecast your reputation trajectory — all from a single dashboard.</p>
-                    <button class="bg-charcoal text-white px-6 py-3 rounded-full font-medium hover:bg-brand-600 transition-all">View Analytics Demo</button>
-                </div>
-                <div class="relative reveal">
-                    <div class="glass-panel p-8 text-center relative z-10">
-                        <div class="w-16 h-16 bg-brand-500 rounded-full mx-auto flex items-center justify-center text-white text-2xl mb-4 shadow-xl">
-                            <i class="ph ph-chart-pie"></i>
-                        </div>
-                        <div class="text-sm font-bold mb-2">Insight Engine Active</div>
-                        <div class="text-xs text-slate-500">Processing sentiment data from 12 channels.</div>
-                    </div>
-                    <div class="absolute inset-0 bg-brand-200 blur-[60px] -z-10 opacity-30"></div>
-                </div>
-            </div>
-
         </div>
     </section>
 
@@ -886,7 +755,6 @@
         lenis.on('scroll', ScrollTrigger.update);
         gsap.ticker.add((time)=>{ lenis.raf(time * 1000) });
 
-        // Scroll reveals
         gsap.utils.toArray('.reveal').forEach(elem => {
             gsap.from(elem, {
                 opacity: 0,
@@ -901,7 +769,6 @@
             });
         });
 
-        // Entrance animation
         gsap.from("header > div > *", {
             opacity: 0,
             y: 20,
@@ -910,7 +777,6 @@
             ease: "power3.out"
         });
 
-        // 02. OUTREACH SPECIFIC ANIMATION
         const outreachTimeline = gsap.timeline({
             scrollTrigger: {
                 trigger: "#analytics-graphic",
@@ -942,7 +808,6 @@
             ease: "elastic.out(1, 0.5)"
         }, "-=0.3");
 
-        // 03. ANALYTICS SPECIFIC ANIMATION
         const analyticsTimeline = gsap.timeline({
             scrollTrigger: {
                 trigger: "#analytics-dashboard-graphic",
@@ -951,7 +816,6 @@
             }
         });
 
-        // 1. Draw bar chart
         analyticsTimeline.from(".bar-item", {
             scaleY: 0,
             transformOrigin: "bottom",
@@ -960,14 +824,12 @@
             ease: "power4.out"
         });
 
-        // 2. Draw line chart
         analyticsTimeline.to(".line-chart-path", {
             strokeDashoffset: 0,
             duration: 1.5,
             ease: "power2.inOut"
         }, "-=0.5");
 
-        // 3. Slide in competitor list
         analyticsTimeline.from(".competitor-row", {
             x: 20,
             opacity: 0,
@@ -976,7 +838,6 @@
             ease: "power2.out"
         }, "-=1");
 
-        // 4. Reveal AI Insight
         analyticsTimeline.from("#ai-insight-box", {
             scale: 0.95,
             opacity: 0,
@@ -984,21 +845,11 @@
             ease: "back.out(1.7)"
         }, "-=0.5");
 
-        // Continuous pulse for active status
-        gsap.to(".text-brand-600.font-bold", {
-            opacity: 0.6,
-            duration: 1.5,
-            repeat: -1,
-            yoyo: true,
-            ease: "power1.inOut"
-        });
-
-        // PERSONALITY PREVIEW LOGIC
         const responseData = {
             professional: {
                 label: "Professional",
                 color: "#22C55E",
-                text: "Thank you for bringing this to our attention, James. We sincerely apologize for the delay in your shipment. This does not meet our standard of service. We have already initiated a full refund for your shipping costs and would like to discuss this further to ensure we resolve this to your satisfaction."
+                text: "Thank you for bringing this to our attention, James. We sincerely apologize for the delay in your shipment. This does not meet our standard of service."
             },
             friendly: {
                 label: "Friendly",
@@ -1008,7 +859,7 @@
             heartfelt: {
                 label: "Heartfelt",
                 color: "#F43F5E",
-                text: "James, we are truly heartbroken to hear we let you down on such a special occasion. We understand how important those birthday moments are, and we feel terrible about the delay. We've refunded your shipping costs, but we know that doesn't fix the surprise. We'd love to send a small gift to make up for this if you're open to it."
+                text: "James, we are truly heartbroken to hear we let you down on such a special occasion. We understand how important those birthday moments are, and we feel terrible about the delay. We've refunded your shipping costs, but we know that doesn't fix the surprise. "
             },
             sarcastic: {
                 label: "Sarcastic",
@@ -1018,7 +869,7 @@
             recovery: {
                 label: "Calm Recovery",
                 color: "#6366F1",
-                text: "James, I completely understand your frustration—a late delivery for a special occasion is unacceptable. Your shipping has been fully refunded, and I've personally verified that our logistics team is investigating why the delay occurred to prevent this happening again. How can we best compensate you for the inconvenience caused today?"
+                text: "James, I completely understand your frustration—a late delivery for a special occasion is unacceptable. Your shipping has been fully refunded, and I've personally verified that our logistics team is investigating why the delay occurred to prevent this happening again. "
             }
         };
 
@@ -1031,18 +882,20 @@
             const selectPersonality = () => {
                 const type = card.getAttribute('data-personality');
                 const data = responseData[type];
-
-                // Update UI
+                
+                // Clear active state from others
                 personalityCards.forEach(c => {
-                    c.classList.remove('active', 'border-brand-500');
-                    c.classList.add('border-slate-200');
-                    c.style.borderColor = '';
+                    c.classList.remove('active', 'border-2');
+                    c.classList.add('border');
+                    c.style.borderColor = '#e2e8f0'; // Default slate-200
                 });
-                card.classList.add('active');
-                card.classList.remove('border-slate-200');
+                
+                // Set active state
+                card.classList.add('active', 'border-2');
+                card.classList.remove('border');
                 card.style.borderColor = data.color;
 
-                // Animate Text Change
+                // Animate text update
                 gsap.to(responseContent, {
                     opacity: 0, y: 5, duration: 0.1, onComplete: () => {
                         responseContent.innerText = data.text;
@@ -1055,59 +908,6 @@
 
             card.addEventListener('mouseenter', selectPersonality);
             card.addEventListener('click', selectPersonality);
-        });
-
-        // Entrance animation
-        gsap.from("header > div > *", {
-            opacity: 0, y: 20, stagger: 0.1, duration: 1, ease: "power3.out"
-        });
-
-         // 04. PERSONALIZATION SPECIFIC ANIMATION
-        const personalityTimeline = gsap.timeline({
-            scrollTrigger: {
-                trigger: "#personality-graphic",
-                start: "top 70%",
-                toggleActions: "play none none none"
-            }
-        });
-
-        personalityTimeline.from(".personality-card", {
-            x: -50,
-            opacity: 0,
-            stagger: 0.1,
-            duration: 0.8,
-            ease: "power3.out"
-        });
-
-        personalityTimeline.from("#ai-clone-card", {
-            y: 40,
-            opacity: 0,
-            duration: 1,
-            ease: "power4.out"
-        }, "-=0.4");
-
-        // Interactive "Shifting" Cards
-        const cards = document.querySelectorAll('.personality-card');
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                gsap.to(card, { x: 20, scale: 1.02, backgroundColor: 'rgba(255,255,255,0.8)', duration: 0.3 });
-                // Dim others
-                cards.forEach(other => {
-                    if (other !== card) gsap.to(other, { opacity: 0.4, x: -10, duration: 0.3 });
-                });
-            });
-            card.addEventListener('mouseleave', () => {
-                gsap.to(cards, { x: 0, scale: 1, backgroundColor: 'white', opacity: 1, duration: 0.3 });
-            });
-        });
-
-        // Continuous pulse for active status
-        gsap.to(".text-brand-600.font-bold", {
-            opacity: 0.6,
-            duration: 1.5,
-            repeat: -1,
-            yoyo: true,
-            ease: "power1.inOut"
         });
     </script>
 </body>

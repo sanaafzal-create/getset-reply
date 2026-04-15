@@ -181,24 +181,20 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
+    <nav class="fixed top-0 w-full z-50 glass-nav">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2 font-bold text-xl tracking-tight">
+            <div class="flex items-center gap-2 font-bold text-xl tracking-tight cursor-pointer" onclick="window.location.href='index.html'">
                 <i class="ph-fill ph-paper-plane-tilt text-brand-500 text-2xl"></i>
                 <span>GetSetReply</span>
             </div>
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-                <a href="index.html" class="hover:text-brand-600 transition-colors active">Home</a>
-                <a href="feature.html" class="hover:text-brand-600 transition-colors">Features</a>
+            <div class="hidden md:flex items-center gap-10 text-sm font-medium text-slate-600">
+                <a href="index.html" class="text-brand-600 relative after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-brand-500">Home</a>
+                <a href="ffeature.html" class="">Features</a>
                 <a href="pricing.html" class="hover:text-brand-600 transition-colors">Pricing</a>
-                
             </div>
-            <div class="flex items-center gap-4">
-                <a href="#" class="hidden md:block text-sm font-medium text-slate-600 hover:text-charcoal transition-colors">Sign in</a>
-                <button class="bg-charcoal text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-brand-700 transition-colors shadow-lg shadow-brand-700/20">
-                    Get Started
-                </button>
-            </div>
+            <button class="bg-charcoal text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-brand-700 transition-all">
+                Get Started
+            </button>
         </div>
     </nav>
 
@@ -716,7 +712,9 @@
                 <!-- Animated Robot Visual -->
                 <div class="flex-1 flex justify-center items-center relative z-10 animate-float">
                     <svg width="320" height="320" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="100" cy="100" r="80" fill="url(#paint0_radial)" fill-opacity="0.2"/>
+                         <circle cx="100" cy="100" r="80" fill="url(#paint0_radial)" fill-opacity="0.2"/>  
+                        
+
                         <g class="robot-body">
                             <rect x="60" y="80" width="80" height="70" rx="20" fill="white" fill-opacity="0.8" stroke="#E2E8F0" stroke-width="2"/>
                             <rect x="70" y="90" width="60" height="40" rx="10" fill="#061614"/>
