@@ -229,6 +229,7 @@
 
             <!-- Right: Updated Review Case Study Composition -->
             <div class="relative h-[500px] w-full z-10 hero-visual perspective-1000">
+
                 <!-- Base Dashboard Glass -->
                 <div class="absolute inset-4 glass-panel p-6 floating-element-1">
                     <div class="flex items-center justify-between border-b border-white/50 pb-4 mb-4">
@@ -265,7 +266,7 @@
                 </div>
 
                 <!-- Floating Chat Bubble Left (The Customer Review) -->
-                <div class="absolute -left-4 top-10 glass-panel-heavy p-4 max-w-[280px] shadow-2xl floating-element-2 border-l-4 border-l-amber-400 z-20">
+                <div class="absolute -left-4 top-5 glass-panel-heavy p-4 max-w-[280px] shadow-2xl floating-element-2 border-l-4 border-l-amber-400 z-20">
                     <div class="flex items-center gap-1 mb-2 text-amber-400">
                         <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph ph-star"></i>
                     </div>
@@ -273,6 +274,25 @@
                         "The delivery was a bit late, but the product quality exceeded my expectations. Wish tracking was better."
                     </p>
                     <p class="text-[10px] text-slate-400 mt-2 font-medium">— Sarah M. on Google</p>
+                </div>
+
+                <!-- Floating Chat Bubble Middle (AI Analysis) -->
+                <div class="absolute left-[45px] top-[180px] scale-[0.97] z-20 glass-panel-heavy p-4 max-w-[280px] shadow-2xl border-l-4 border-l-red-400">
+                    
+                    <h3 class="text-1xl font-bold tracking-tight mb-4">AI Analysis</h3>
+                    <p class="text-xs font-semibold text-slate-800 leading-relaxed italic">
+                        Sentiment...
+                    </p>
+                    <p class="text-xs font-semibold text-slate-800 leading-relaxed italic">
+                        Key Opportunities...
+                    </p>
+                    <p class="text-xs font-semibold text-slate-800 leading-relaxed italic">
+                        Customer Intent...
+                    </p>
+                    <p class="text-xs font-semibold text-slate-800 leading-relaxed italic">
+                        Response Coaching...
+                    </p>
+                    
                 </div>
 
                 <!-- Floating Chat Bubble Right (The AI Response) -->
@@ -295,7 +315,51 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Flow Arrows -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 600 500" fill="none">
+    
+    <!-- Arrow 1: Review → AI Analysis -->
+    <path 
+        d="M120 90 C 80 160, 120 200, 160 220"
+        stroke="#64748b"
+        stroke-width="2"
+        stroke-dasharray="4 6"
+        stroke-linecap="round"
+        fill="none"
+        marker-end="url(#arrowhead)"
+        opacity="0.6"
+    />
+
+    <!-- Arrow 2: AI Analysis → AI Response -->
+    <path 
+        d="M200 300 C 260 340, 360 340, 420 300"
+        stroke="#64748b"
+        stroke-width="2"
+        stroke-dasharray="4 6"
+        stroke-linecap="round"
+        fill="none"
+        marker-end="url(#arrowhead)"
+        opacity="0.6"
+    />
+
+    <!-- Arrowhead Definition -->
+    <defs>
+        <marker 
+            id="arrowhead" 
+            markerWidth="6" 
+            markerHeight="6" 
+            refX="5" 
+            refY="3" 
+            orient="auto"
+        >
+            <path d="M0,0 L6,3 L0,6 Z" fill="#64748b" opacity="0.7"/>
+        </marker>
+    </defs>
+
+</svg>
             </div>
+
         </div>
     </section>
 
